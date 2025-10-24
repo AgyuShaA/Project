@@ -4,8 +4,9 @@ import "@/config/styles/globals.css";
 import { RestApiProvider } from "@/pkg/libraries/rest-api";
 
 import { type Locale, NextIntlClientProvider } from "next-intl";
-import Header from "@/app/(client)/widgets/header/header.component";
+
 import { FC, ReactNode } from "react";
+import { HeaderComponent } from "@/app/(client)/widgets/header";
 
 interface IProps {
   children: ReactNode;
@@ -37,7 +38,7 @@ const RootLayout: FC<Readonly<IProps>> = async (props) => {
       >
         <NextIntlClientProvider locale={(await params).locale}>
           <RestApiProvider>
-            <Header />
+            <HeaderComponent />
 
             {children}
           </RestApiProvider>

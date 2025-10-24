@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { routing } from "@/pkg/libraries/locale/routing";
-import LoginForm from "@/app/(client)/widgets/login/login-form.component";
+import { LoginFormComponent } from "@/app/(client)/widgets/login";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 export default async function Login() {
   return (
     <Suspense fallback={<p>Loading posts...</p>}>
-      <LoginForm />
+      <LoginFormComponent />
     </Suspense>
   );
 }
