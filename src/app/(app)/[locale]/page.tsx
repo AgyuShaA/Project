@@ -20,6 +20,7 @@ export async function generateStaticParams() {
 
 export default async function Home() {
   const queryClient = getQueryClient();
+
   queryClient.prefetchQuery(postQueryOptions());
 
   const dehydratedState = dehydrate(queryClient);

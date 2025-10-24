@@ -38,6 +38,7 @@ const RootLayout: FC<Readonly<IProps>> = async (props) => {
         <NextIntlClientProvider locale={(await params).locale}>
           <RestApiProvider>
             <Header />
+
             {children}
           </RestApiProvider>
         </NextIntlClientProvider>
