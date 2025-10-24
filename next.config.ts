@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["upload.wikimedia.org"],
   },
+  cacheComponents: true,
 };
 
 const nextConfigWithIntl = createNextIntlPlugin({

@@ -10,7 +10,6 @@ import {
 import { Input } from "../../shared/ui/input";
 import { Button } from "../../shared/ui/button";
 import { useForm } from "react-hook-form";
-import { redirect } from "@/pkg/libraries/locale/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginForm, LoginFormSchema } from "./login-form.interface";
 import { useMutation } from "@tanstack/react-query";

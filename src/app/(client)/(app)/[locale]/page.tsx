@@ -1,28 +1,22 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
+import { cacheLife } from "next/cache";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
-
 import { postQueryOptions } from "@/app/(client)/entities/api/post";
 import { HomeModule } from "@/app/(client)/modules/home";
 import { routing } from "@/pkg/libraries/locale/routing";
 
-export const revalidate = 30;
-export const dynamic = "force-static";
-
 export async function generateStaticParams() {
-  const locales = routing.locales;
-
-  return locales.map((locale) => ({
-    locale,
-  }));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function Home() {
+  "use cache";
+  cacheLife("default");
+
   const queryClient = getQueryClient();
-
-  queryClient.prefetchQuery(postQueryOptions());
-
+  await queryClient.prefetchQuery(postQueryOptions());
   const dehydratedState = dehydrate(queryClient);
 
   return (

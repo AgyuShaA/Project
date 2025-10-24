@@ -1,12 +1,10 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { cacheLife } from "next/cache";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
 import { PostIdModule } from "@/app/(client)/modules/post";
 import { postQueryOptionsById } from "@/app/(client)/entities/api/post";
 import { routing } from "@/pkg/libraries/locale/routing";
-
-export const revalidate = 30;
-export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const locales = routing.locales;
@@ -28,15 +26,19 @@ interface PostPageProps {
 }
 
 export default async function PostPage({ params }: PostPageProps) {
+  "use cache";
+  cacheLife("default");
+
   const { id } = await params;
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery(postQueryOptionsById(id));
+  queryClient.prefetchQuery(postQueryOptionsById(id));
 
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <HydrationBoundary state={dehydratedState}>
+      {" "}
       <div className="mx-auto max-w-2xl space-y-4 p-4">
         <PostIdModule id={id} />
       </div>

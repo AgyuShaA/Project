@@ -7,6 +7,9 @@ import { type Locale, NextIntlClientProvider } from "next-intl";
 
 import { FC, ReactNode } from "react";
 import { HeaderComponent } from "@/app/(client)/widgets/header";
+import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
+import { User } from "../../entities/models/user.model";
+import { setRequestLocale } from "next-intl/server";
 
 interface IProps {
   children: ReactNode;
@@ -31,12 +34,13 @@ export const metadata: Metadata = {
 const RootLayout: FC<Readonly<IProps>> = async (props) => {
   const { children, params } = props;
 
+  setRequestLocale((await params).locale);
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider locale={(await params).locale}>
+        <NextIntlClientProvider>
           <RestApiProvider>
             <HeaderComponent />
 
