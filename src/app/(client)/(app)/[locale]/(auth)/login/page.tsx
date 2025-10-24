@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { routing } from "@/pkg/libraries/locale/routing";
-import { LoginFormComponent } from "@/app/(client)/widgets/login";
+import { LoginFormComponent } from "@/app/(client)/features/login";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

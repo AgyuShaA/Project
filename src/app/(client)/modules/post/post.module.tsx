@@ -6,7 +6,7 @@ interface PostModuleProps {
   id: string;
 }
 
-const PostModule: FC<PostModuleProps> = ({ id }) => {
+const PostIdModule: FC<PostModuleProps> = ({ id }) => {
   return (
     <ContainerComponent className="w-full space-y-12 pb-[72px]">
       <PostIdComponent id={id} />
@@ -14,4 +14,4 @@ const PostModule: FC<PostModuleProps> = ({ id }) => {
   );
 };
 
-export default PostModule;
+export default PostIdModule;

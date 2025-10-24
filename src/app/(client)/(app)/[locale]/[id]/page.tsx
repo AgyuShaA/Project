@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
-import { PostModule } from "@/app/(client)/modules/post";
+import { PostIdModule } from "@/app/(client)/modules/post";
 import { postQueryOptionsById } from "@/app/(client)/entities/api/post";
 import { routing } from "@/pkg/libraries/locale/routing";
 
@@ -38,7 +38,7 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <HydrationBoundary state={dehydratedState}>
       <div className="mx-auto max-w-2xl space-y-4 p-4">
-        <PostModule id={id} />
+        <PostIdModule id={id} />
       </div>
     </HydrationBoundary>
   );
