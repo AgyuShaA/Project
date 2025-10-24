@@ -6,6 +6,7 @@ import { Button } from "@/client/shared/ui/button";
 import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
 import { Link, redirect } from "@/pkg/libraries/locale/navigation";
 import { User } from "../../entities/models/user.model";
+import Image from "next/image";
 
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
@@ -48,7 +49,7 @@ export default function Header() {
           {user ? (
             <>
               {user.image && (
-                <img
+                <Image
                   src={user.image}
                   alt={user.name}
                   className="w-8 h-8 rounded-full object-cover"

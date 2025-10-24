@@ -29,7 +29,7 @@ export default function LoginFormComponent() {
     setLoading(true);
     setErrorMsg("");
 
-    const { data, error } = await authClient.signIn.email(
+    await authClient.signIn.email(
       {
         email: values.email,
         password: values.password,

@@ -2,20 +2,22 @@
 
 import { Post } from "@/app/(client)/entities/models/post.model";
 import { PostCard } from "@/app/(client)/shared/ui/post-card";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { postQueryOptions } from "../../entities/api/post";
 import { usePostsFilterStore } from "../../shared/store";
 
 export default function PostList() {
-  const [isClient, setIsClient] = useState(false);
   const { data: postsData, isLoading, isError } = useQuery(postQueryOptions());
   const { filteredPosts, setPosts } = usePostsFilterStore();
 
   useEffect(() => {
-    setIsClient(true);
     if (postsData) setPosts(postsData);
   }, [postsData, setPosts]);
+
+  useEffect(() => {}, []);
+
+  const isClient = typeof window !== "undefined";
 
   if (!isClient) return null;
 

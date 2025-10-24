@@ -1,10 +1,5 @@
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
 
-import { getQueryClient } from "@/pkg/libraries/rest-api/service";
-
-import { postQueryOptions } from "@/app/(client)/entities/api/post";
-import { HomeModule } from "@/app/(client)/modules/home";
 import { routing } from "@/pkg/libraries/locale/routing";
 import RegisterForm from "@/app/(client)/widgets/register/register-form.component";
 
