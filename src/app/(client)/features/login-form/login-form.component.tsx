@@ -14,11 +14,12 @@ import { Button } from "../../shared/ui/button";
 import { useForm } from "react-hook-form";
 import { redirect } from "@/pkg/libraries/locale/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormSchema } from "./login-form.interface";
+import { ILoginForm, LoginFormSchema } from "./login-form.interface";
+import { useMutation } from "@tanstack/react-query";
+import { loginMutationOptions } from "../../entities/api/auth/auth.mutations";
 
 export default function LoginFormComponent() {
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const { mutateAsync: login, isPending } = useMutation(loginMutationOptions());
 
   const form = useForm({
     defaultValues: {
@@ -28,31 +29,22 @@ export default function LoginFormComponent() {
     resolver: zodResolver(LoginFormSchema),
   });
 
-  const handleSubmit = async (values: { email: string; password: string }) => {
-    setLoading(true);
-    setErrorMsg("");
-
-    await authClient.signIn.email(
-      {
-        email: values.email,
-        password: values.password,
-
-        rememberMe: true,
-      },
-      {
-        onSuccess: () => redirect({ href: "/", locale: "en" }),
-        onError: (ctx) => setErrorMsg(ctx.error.message),
+  const onSubmit = async (data: ILoginForm) => {
+    try {
+      const response = await login(data);
+      if (response.success) {
+        redirect({ href: "/", locale: "en" });
       }
-    );
-
-    setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSubmit)}
+          onSubmit={form.handleSubmit(onSubmit)}
           className="flex min-w-[30%] flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
         >
           <FormField
@@ -79,11 +71,9 @@ export default function LoginFormComponent() {
             )}
           />
 
-          <Button type="submit" disabled={loading}>
-            {loading ? "Signing in…" : "Sign In"}
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Signing in…" : "Sign In"}
           </Button>
-
-          {errorMsg && <p className="text-red-500">{errorMsg}</p>}
         </form>
       </Form>
     </div>

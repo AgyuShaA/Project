@@ -14,11 +14,14 @@ import { Button } from "../../shared/ui/button";
 import { useForm } from "react-hook-form";
 import { redirect } from "@/pkg/libraries/locale/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterFormSchema } from "./register-form.interface";
+import { IRegisterForm, RegisterFormSchema } from "./register-form.interface";
+import { registerMutationOptions } from "../../entities/api/auth/auth.mutations";
+import { useMutation } from "@tanstack/react-query";
 
 export default function RegisterFormComponent() {
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const { mutateAsync: register, isPending } = useMutation(
+    registerMutationOptions()
+  );
 
   const form = useForm({
     defaultValues: {
@@ -29,36 +32,23 @@ export default function RegisterFormComponent() {
     resolver: zodResolver(RegisterFormSchema),
   });
 
-  const handleSubmit = async (values: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
-    setLoading(true);
-    setErrorMsg("");
+  const onSubmit = async (data: IRegisterForm) => {
+    try {
+      const response = await register(data);
 
-    await authClient.signUp.email(
-      {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-      },
-      {
-        onSuccess: () => redirect({ href: "/", locale: "en" }),
-        onError: (ctx) => setErrorMsg(ctx.error.message),
+      if (response.success) {
+        redirect({ href: "/", locale: "en" });
       }
-    );
-
-    setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSubmit)}
+          onSubmit={form.handleSubmit(onSubmit)}
           className=" flex min-w-[30%] items-center justify-center flex-col  max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4"
         >
           <FormField
@@ -100,11 +90,9 @@ export default function RegisterFormComponent() {
             )}
           />
 
-          <Button type="submit" disabled={loading}>
-            {loading ? "Signing up…" : "Sign Up"}
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Signing up…" : "Sign Up"}
           </Button>
-
-          {errorMsg && <p className="text-red-500">{errorMsg}</p>}
         </form>
       </Form>
     </div>
