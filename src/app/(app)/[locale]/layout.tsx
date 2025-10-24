@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../../globals.css";
+import "@/config/styles/globals.css";
 import { RestApiProvider } from "@/pkg/libraries/rest-api";
 
 import { type Locale, NextIntlClientProvider } from "next-intl";
