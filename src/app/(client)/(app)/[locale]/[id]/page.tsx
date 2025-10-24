@@ -8,6 +8,7 @@ import { routing } from "@/pkg/libraries/locale/routing";
 
 export async function generateStaticParams() {
   const locales = routing.locales;
+
   const ids = Array.from({ length: 100 }, (_, i) => (i + 1).toString());
 
   const params: { locale: string; id: string }[] = [];
