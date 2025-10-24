@@ -1,1 +1,1 @@
-export { default as PostComponent } from './post-component.component'
+export { default as RegisterFormComponent } from "./register-form.component";
