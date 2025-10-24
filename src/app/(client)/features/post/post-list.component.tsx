@@ -20,8 +20,8 @@ export default function PostList() {
   if (!isClient) return null;
 
   if (isLoading) return <p>Loading posts...</p>;
+
   if (isError) return <p>Error loading posts</p>;
-  console.log(filteredPosts, postsData);
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">

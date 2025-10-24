@@ -14,7 +14,9 @@ export default function Header() {
   useEffect(() => {
     const fetchUser = async () => {
       setLoading(true);
+
       const { data } = await authClient.getSession();
+
       if (data?.user)
         setUser(
           data?.user
@@ -22,6 +24,7 @@ export default function Header() {
             : null
         );
       else setUser(null);
+
       setLoading(false);
     };
 
@@ -51,7 +54,9 @@ export default function Header() {
                   className="w-8 h-8 rounded-full object-cover"
                 />
               )}
+
               <span>{user.name}</span>
+
               <Button variant="outline" onClick={handleLogout}>
                 Logout
               </Button>
@@ -61,6 +66,7 @@ export default function Header() {
               <Link href="/register">
                 <Button>Register</Button>
               </Link>
+
               <Link href="/login">
                 <Button variant="outline">Login</Button>
               </Link>

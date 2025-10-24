@@ -57,6 +57,7 @@ export default function LoginFormComponent() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
+
                 <FormControl>
                   <Input type="email" placeholder="Your email" {...field} />
                 </FormControl>
@@ -69,6 +70,7 @@ export default function LoginFormComponent() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
+
                 <FormControl>
                   <Input type="password" placeholder="Password" {...field} />
                 </FormControl>

@@ -13,6 +13,7 @@ export default function PostComponent() {
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">
       <PostListFilters />
+
       <PostList />
     </div>
   );

@@ -25,6 +25,7 @@ export default function PostCardDynamic({
       <h2 className="text-center text-xl font-bold">{post.title}</h2>
 
       <p className="text-center text-gray-700">{post.body}</p>
+
       {showButton && (
         <Link href={`/${post.id}`}>
           <Button variant="default">View Post</Button>
