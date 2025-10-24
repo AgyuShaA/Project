@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { routing } from "@/pkg/libraries/locale/routing";
-import RegisterFormComponent from "@/app/(client)/features/register/register-form.component";
+import RegisterFormComponent from "@/app/(client)/features/register-form/register-form.component";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

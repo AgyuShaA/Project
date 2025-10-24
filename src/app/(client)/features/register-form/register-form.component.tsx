@@ -13,28 +13,37 @@ import { Input } from "../../shared/ui/input";
 import { Button } from "../../shared/ui/button";
 import { useForm } from "react-hook-form";
 import { redirect } from "@/pkg/libraries/locale/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterFormSchema } from "./register-form.interface";
 
-export default function LoginFormComponent() {
+export default function RegisterFormComponent() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const form = useForm({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
+    resolver: zodResolver(RegisterFormSchema),
   });
 
-  const handleSubmit = async (values: { email: string; password: string }) => {
+  const handleSubmit = async (values: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
     setLoading(true);
     setErrorMsg("");
 
-    const { data, error } = await authClient.signIn.email(
+    await authClient.signUp.email(
       {
+        name: values.name,
         email: values.email,
         password: values.password,
-
-        rememberMe: true,
+        image:
+          "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
       },
       {
         onSuccess: () => redirect({ href: "/", locale: "en" }),
@@ -50,13 +59,27 @@ export default function LoginFormComponent() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="flex min-w-[30%] flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
+          className=" flex min-w-[30%] items-center justify-center flex-col  max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4"
         >
+          <FormField
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+
+                <FormControl>
+                  <Input placeholder="Your full name" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
           <FormField
             name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
+
                 <FormControl>
                   <Input type="email" placeholder="Your email" {...field} />
                 </FormControl>
@@ -69,6 +92,7 @@ export default function LoginFormComponent() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
+
                 <FormControl>
                   <Input type="password" placeholder="Password" {...field} />
                 </FormControl>
@@ -77,7 +101,7 @@ export default function LoginFormComponent() {
           />
 
           <Button type="submit" disabled={loading}>
-            {loading ? "Signing in…" : "Sign In"}
+            {loading ? "Signing up…" : "Sign Up"}
           </Button>
 
           {errorMsg && <p className="text-red-500">{errorMsg}</p>}
