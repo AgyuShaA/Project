@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+@config '../../../tailwind.config.ts';
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-green: rgb(16, 117, 110); /* ✅ your custom green */
+  --color-green-custom: rgb(16, 117, 110); /* ✅ your custom green */
+}
+
+html,
+body {
+  overflow-x: hidden;
+  color: #2b2d42;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    overflow-x: hidden;
+
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --green: rgb(16, 117, 110); /* ✅ your custom green */
+  }
+}
+
+.light {
+  color-scheme: light;
+  --heroui-background: 0 0% 100%;
+  --heroui-foreground: 240 3.7% 5.29%;
+  --heroui-divider: 220 8.94% 46.08%;
+  --heroui-focus: 212.01999999999998 100% 46.67%;
+  --heroui-overlay: 0 0% 0%;
+  --heroui-content1: 0 0% 100%;
+  --heroui-content1-foreground: 201.81999999999994 24.44% 8.82%;
+  --heroui-content2: 240 4.76% 95.88%;
+  --heroui-content2-foreground: 240 3.7% 15.88%;
+  --heroui-content3: 240 5.88% 90%;
+  --heroui-content3-foreground: 240 5.26% 26.08%;
+  --heroui-content4: 240 4.88% 83.92%;
+  --heroui-content4-foreground: 240 5.2% 33.92%;
+  --heroui-default-900: 240 5.88% 10%;
+  --heroui-default-foreground: 0 0% 0%;
+  --heroui-default: 240 4.88% 83.92%;
+  --heroui-primary-50: 212.5 92.31% 94.9%;
+  --heroui-primary-100: 211.84000000000003 92.45% 89.61%;
+  --heroui-primary-200: 211.84000000000003 92.45% 79.22%;
+  --heroui-primary-300: 212.24 92.45% 68.82%;
+  --heroui-primary-400: 212.14 92.45% 58.43%;
+  --heroui-primary-500: 212.01999999999998 100% 46.67%;
+  --heroui-primary-600: 212.14 100% 38.43%;
+  --heroui-primary-700: 212.24 100% 28.82%;
+  --heroui-primary-800: 211.84000000000003 100% 19.22%;
+  --heroui-primary-900: 211.84000000000003 100% 9.61%;
+  --heroui-primary-foreground: 0 0% 100%;
+  --heroui-primary: 212.01999999999998 100% 46.67%;
+  --heroui-secondary-50: 270 61.54% 94.9%;
+  --heroui-secondary-100: 270 59.26% 89.41%;
+  --heroui-secondary-200: 270 59.26% 78.82%;
+  --heroui-secondary-300: 270 59.26% 68.24%;
+  --heroui-secondary-400: 270 59.26% 57.65%;
+  --heroui-secondary-500: 270 66.67% 47.06%;
+  --heroui-secondary-600: 270 66.67% 37.65%;
+  --heroui-secondary-700: 270 66.67% 28.24%;
+  --heroui-secondary-800: 270 66.67% 18.82%;
+  --heroui-secondary-900: 270 66.67% 9.41%;
+  --heroui-secondary-foreground: 0 0% 100%;
+  --heroui-secondary: 270 66.67% 47.06%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.button-primary {
+  background-color: var(--color-green);
+  color: white;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+
+.button-primary:hover {
+  opacity: 0.9;
+}
+
+.text-medium {
+  font-size: var(--heroui-font-size-medium);
+  line-height: var(--heroui-line-height-medium);
+}
