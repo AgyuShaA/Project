@@ -3,7 +3,7 @@
 import { type FC } from "react";
 
 import { useRouter } from "next/navigation";
-import { Button } from "../(client)/shared/ui/button";
+import { Button } from "../shared/ui/button";
 
 interface IProps {
   title?: string;
