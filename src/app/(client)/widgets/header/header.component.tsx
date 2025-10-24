@@ -53,7 +53,8 @@ export default function Header() {
                   src={user.image}
                   alt={user.name}
                   className="w-8 h-8 rounded-full object-cover"
-                  fill
+                  width={8}
+                  height={8}
                 />
               )}
 
