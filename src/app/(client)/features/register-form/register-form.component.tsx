@@ -17,12 +17,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { IRegisterForm, RegisterFormSchema } from "./register-form.interface";
 import { registerMutationOptions } from "../../entities/api/auth/auth.mutations";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export default function RegisterFormComponent() {
   const { mutateAsync: register, isPending } = useMutation(
     registerMutationOptions()
   );
-
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       name: "",
@@ -37,7 +38,7 @@ export default function RegisterFormComponent() {
       const response = await register(data);
 
       if (response.success) {
-        redirect({ href: "/", locale: "en" });
+        router.push("/");
       }
     } catch (error) {
       console.error(error);

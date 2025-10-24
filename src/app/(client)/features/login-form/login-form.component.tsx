@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
 import {
   Form,
   FormField,
@@ -17,10 +15,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginForm, LoginFormSchema } from "./login-form.interface";
 import { useMutation } from "@tanstack/react-query";
 import { loginMutationOptions } from "../../entities/api/auth/auth.mutations";
+import { useRouter } from "next/navigation";
 
 export default function LoginFormComponent() {
   const { mutateAsync: login, isPending } = useMutation(loginMutationOptions());
-
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       email: "",
@@ -32,9 +31,9 @@ export default function LoginFormComponent() {
   const onSubmit = async (data: ILoginForm) => {
     try {
       const response = await login(data);
-      if (response.success) {
-        redirect({ href: "/", locale: "en" });
-      }
+      console.log(response);
+
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
