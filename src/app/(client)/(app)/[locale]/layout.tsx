@@ -7,8 +7,7 @@ import { type Locale, NextIntlClientProvider } from "next-intl";
 
 import { FC, ReactNode } from "react";
 import { HeaderComponent } from "@/app/(client)/(app)/widgets/header";
-import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
-import { User } from "../entities/models/user.model";
+
 import { setRequestLocale } from "next-intl/server";
 
 interface IProps {

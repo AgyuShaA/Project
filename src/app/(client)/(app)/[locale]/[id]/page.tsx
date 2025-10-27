@@ -1,5 +1,4 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { cacheLife } from "next/cache";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
 

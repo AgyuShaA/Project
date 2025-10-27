@@ -14,10 +14,9 @@ import { useTranslations } from "next-intl";
 
 interface PostCardProps {
   post: Post;
-  showButton?: boolean;
 }
 
-export default function PostCard({ post, showButton = true }: PostCardProps) {
+export default function PostCard({ post }: PostCardProps) {
   const t = useTranslations("posts");
 
   return (

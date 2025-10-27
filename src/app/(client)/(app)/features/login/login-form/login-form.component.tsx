@@ -36,23 +36,24 @@ export default function LoginFormComponent() {
     handleSubmit,
     setError,
     formState: { errors },
+    reset,
   } = form;
 
   const onSubmit = async (data: ILoginForm) => {
     try {
-      await login(data);
+      const res = await login(data);
+
+      if (res.success) {
+        router.push("/");
+      } else if (res?.error?.message) {
+        setError(res.error.message as keyof ILoginForm, {
+          message: res.error.message,
+        });
+      }
+
       router.push("/");
     } catch (error: any) {
-      const message =
-        error?.response?.data?.message || t("errors.somethingWentWrong");
-
-      if (message.toLowerCase().includes("email")) {
-        setError("email", { message });
-      } else if (message.toLowerCase().includes("password")) {
-        setError("password", { message });
-      } else {
-        setError("root", { message });
-      }
+      console.error(error);
     }
   };
 

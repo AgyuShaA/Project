@@ -8,6 +8,7 @@ export const loginMutationOptions = () => {
     mutationFn: (loginData: ILogin) => credentialsLogin(loginData),
     onError: (error) => {
       console.error(error);
+      return error;
     },
   });
 };

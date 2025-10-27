@@ -10,11 +10,22 @@ export async function credentialsLogin(
   loginData: ILogin
 ): Promise<ILoginResponse> {
   try {
-    await authClient.signIn.email({
+    const res = await authClient.signIn.email({
       email: loginData.email,
       password: loginData.password,
     });
-    return { success: true };
+
+    if (res.data) {
+      return { success: true };
+    } else {
+      return {
+        success: false,
+        error: {
+          message: res.error.message || "Somthing went wrong",
+          statusCode: 500,
+        },
+      };
+    }
   } catch (error) {
     return {
       success: false,
