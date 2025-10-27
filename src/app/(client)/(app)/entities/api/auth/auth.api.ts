@@ -18,7 +18,7 @@ export async function credentialsLogin(
   } catch (error) {
     return {
       success: false,
-      error: { message: (error as Error).message, statusCode: 400 },
+      error: { message: (error as Error).message, statusCode: 500 },
     };
   }
 }
@@ -36,7 +36,7 @@ export async function credentialsRegister(
   } catch (error) {
     return {
       success: false,
-      error: { message: (error as Error).message, statusCode: 400 },
+      error: { message: (error as Error).message, statusCode: 500 },
     };
   }
 }

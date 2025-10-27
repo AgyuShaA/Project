@@ -18,7 +18,7 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post, showButton = true }: PostCardProps) {
-  const t = useTranslations("posts"); // client-side hook
+  const t = useTranslations("posts");
 
   return (
     <Card className="flex flex-col items-center gap-4 rounded-lg border border-gray-200 p-6 shadow-sm">
@@ -30,15 +30,13 @@ export default function PostCard({ post, showButton = true }: PostCardProps) {
         <p className="text-center text-gray-700">{post.body}</p>
       </CardContentComponent>
 
-      {showButton && (
-        <CardFooterComponent>
-          <Link href={`/${post.id}`}>
-            <Button className="cursor-pointer" variant="default">
-              {t("viewPost")} {/* key from your translation JSON */}
-            </Button>
-          </Link>
-        </CardFooterComponent>
-      )}
+      <CardFooterComponent>
+        <Link href={`/${post.id}`}>
+          <Button className="cursor-pointer" variant="default">
+            {t("viewPost")}
+          </Button>
+        </Link>
+      </CardFooterComponent>
     </Card>
   );
 }

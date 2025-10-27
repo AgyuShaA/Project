@@ -1,6 +1,5 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { FC, Suspense } from "react";
-import { cacheLife } from "next/cache";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
 
@@ -20,7 +19,6 @@ interface IProps {
 
 const Page: FC<Readonly<IProps>> = async (props) => {
   "use cache";
-  cacheLife("default");
 
   const { locale } = await props.params;
 

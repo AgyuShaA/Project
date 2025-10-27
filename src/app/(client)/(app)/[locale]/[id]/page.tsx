@@ -31,7 +31,6 @@ interface PostPageProps {
 
 export default async function PostPage({ params }: PostPageProps) {
   "use cache";
-  cacheLife("default");
 
   const { id, locale } = await params;
 
