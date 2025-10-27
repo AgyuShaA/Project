@@ -3,20 +3,20 @@ import { Suspense } from "react";
 import { cacheLife } from "next/cache";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
-import { postQueryOptions } from "@/app/(client)/entities/api/post";
-import { HomeModule } from "@/app/(client)/modules/home";
+import { postQueryOptions } from "@/app/(client)/(app)/entities/api/post";
+import { HomeModule } from "@/app/(client)/(app)/modules/home";
 import { routing } from "@/pkg/libraries/locale/routing";
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function Home() {
+export default function Home() {
   "use cache";
   cacheLife("default");
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(postQueryOptions());
+  queryClient.prefetchQuery(postQueryOptions());
   const dehydratedState = dehydrate(queryClient);
 
   return (

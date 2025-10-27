@@ -1,12 +1,12 @@
 import { FC, Suspense } from "react";
 
-import { LoginFormComponent } from "@/app/(client)/features/login-form";
+import { LoginFormComponent } from "@/app/(client)/(app)/features/login-form";
 import { routing } from "@/pkg/libraries/locale/routing";
 import { setRequestLocale } from "next-intl/server";
 
 interface IProps extends PageProps<"/[locale]/login"> {}
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const locales = routing.locales;
 
   return locales.map((locale) => ({

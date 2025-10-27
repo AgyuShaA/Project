@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { Post } from "@/app/(client)/entities/models";
+import { Post } from "@/app/(client)/(app)/entities/models";
 import {
   Card,
   CardContentComponent,

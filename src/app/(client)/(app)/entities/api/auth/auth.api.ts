@@ -3,7 +3,7 @@ import {
   ILoginResponse,
   IRegister,
   IRegisterResponse,
-} from "@/app/(client)/entities/models";
+} from "@/app/(client)/(app)/entities/models";
 import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
 
 export async function credentialsLogin(

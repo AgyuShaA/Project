@@ -1,7 +1,7 @@
 "use client";
 
-import { Post } from "@/app/(client)/entities/models/post.model";
-import { PostCard } from "@/app/(client)/shared/ui/post-card";
+import { Post } from "@/app/(client)/(app)/entities/models/post.model";
+import { PostCard } from "@/app/(client)/(app)/shared/ui/post-card";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { postQueryOptions } from "../../entities/api/post";

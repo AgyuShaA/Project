@@ -5,7 +5,7 @@ import { Button } from "../../shared/ui/button";
 import { Suspense } from "react";
 
 const PostCardDynamic = dynamic(() =>
-  import("@/client/features/post").then((m) => m.PostCardDynamic)
+  import("@/app/(client)/(app)/features/post").then((m) => m.PostCardDynamic)
 );
 
 interface PostIdComponentProps {

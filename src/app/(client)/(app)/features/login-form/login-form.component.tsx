@@ -6,7 +6,7 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-} from "@/client/shared/ui/form";
+} from "@/app/(client)/(app)/shared/ui/form";
 import { Input } from "../../shared/ui/input";
 import { Button } from "../../shared/ui/button";
 import { useForm } from "react-hook-form";

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { Button } from "@/client/shared/ui/button";
+import { Button } from "@/app/(client)/(app)/shared/ui/button";
 import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
 import { Link, redirect } from "@/pkg/libraries/locale/navigation";
 import { User } from "../../entities/models/user.model";
