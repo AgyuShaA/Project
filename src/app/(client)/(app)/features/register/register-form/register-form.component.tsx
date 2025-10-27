@@ -82,9 +82,11 @@ export default function RegisterFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Full Name</FormLabel>
+
                 <FormControl>
                   <Input placeholder="Your full name" {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.name?.message}
                 </FormMessage>
@@ -97,9 +99,11 @@ export default function RegisterFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Email</FormLabel>
+
                 <FormControl>
                   <Input type="email" placeholder="Your email" {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.email?.message}
                 </FormMessage>
@@ -112,9 +116,11 @@ export default function RegisterFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Password</FormLabel>
+
                 <FormControl>
                   <Input type="password" placeholder="Password" {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.password?.message}{" "}
                 </FormMessage>

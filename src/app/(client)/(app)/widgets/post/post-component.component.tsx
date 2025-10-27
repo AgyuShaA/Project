@@ -7,6 +7,7 @@ const PostListFilters = dynamic(() =>
     (m) => m.PostListFilters
   )
 );
+
 const PostList = dynamic(
   () =>
     import("@/app/(client)/(app)/features/post/post-list").then(

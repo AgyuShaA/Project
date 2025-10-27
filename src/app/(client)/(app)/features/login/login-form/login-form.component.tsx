@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 export default function LoginFormComponent() {
   const { mutateAsync: login, isPending } = useMutation(loginMutationOptions());
   const router = useRouter();
+
   const form = useForm<ILoginForm>({
     defaultValues: {
       email: "",
@@ -69,9 +70,11 @@ export default function LoginFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Email</FormLabel>
+
                 <FormControl>
                   <Input type="email" placeholder="Your email" {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.email?.message}
                 </FormMessage>
@@ -84,9 +87,11 @@ export default function LoginFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>Password</FormLabel>
+
                 <FormControl>
                   <Input type="password" placeholder="Password" {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.password?.message}
                 </FormMessage>

@@ -7,13 +7,13 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
 
   poweredByHeader: false,
+
   cacheMaxMemorySize: 100 * 1024 * 1024,
 
   output: "standalone",
 
   images: {
     domains: ["upload.wikimedia.org"],
-
     remotePatterns: [{ protocol: "https", hostname: "**" }],
     minimumCacheTTL: 3600,
     formats: ["image/webp", "image/avif"],
