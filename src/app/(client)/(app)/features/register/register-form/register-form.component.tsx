@@ -18,6 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { ApiError } from "../../../entities/models";
 
 export default function RegisterFormComponent() {
   const t = useTranslations("register");
@@ -52,9 +53,11 @@ export default function RegisterFormComponent() {
           message: response.error.message,
         });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as ApiError;
+
       const message =
-        error?.response?.data?.message || t("errors.somethingWentWrong");
+        err?.response?.data?.message || t("errors.somethingWentWrong");
 
       if (message.toLowerCase().includes("email")) {
         setError("email", { message });

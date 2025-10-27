@@ -10,7 +10,7 @@ import {
   useRouter,
 } from "@/pkg/libraries/locale/navigation";
 import { User } from "../../entities/models/user.model";
-import Image from "next/image";
+
 import { useTranslations, useLocale } from "next-intl";
 
 export default function Header() {

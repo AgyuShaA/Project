@@ -14,7 +14,7 @@ export async function proxy(req: NextRequest) {
   );
 
   const [_, predefinedLocale, ...segments] = req.nextUrl.pathname.split("/");
-
+  console.log(_);
   const pathWithoutLocale = "/" + segments.join("/");
 
   const isLocaleProvided = headerLocale == predefinedLocale;

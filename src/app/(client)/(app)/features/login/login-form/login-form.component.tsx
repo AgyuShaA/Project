@@ -36,7 +36,6 @@ export default function LoginFormComponent() {
     handleSubmit,
     setError,
     formState: { errors },
-    reset,
   } = form;
 
   const onSubmit = async (data: ILoginForm) => {
@@ -52,7 +51,7 @@ export default function LoginFormComponent() {
       }
 
       router.push("/");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
     }
   };

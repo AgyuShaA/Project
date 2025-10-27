@@ -16,7 +16,15 @@ export interface IResponseError {
   statusCode: number;
 }
 
-export interface IRegisterResponse extends IResponse<void> {}
+export interface ApiError {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+}
+
+export type IRegisterResponse = IResponse<void>;
 
 export interface ILogin {
   email: string;
@@ -24,4 +32,4 @@ export interface ILogin {
   callbackURL?: string;
 }
 
-export interface ILoginResponse extends IResponse<void> {}
+export type ILoginResponse = IResponse<void>;
