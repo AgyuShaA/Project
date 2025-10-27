@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-
 import { Post } from "@/app/(client)/(app)/entities/models";
 import {
   Card,
@@ -11,6 +10,7 @@ import {
   CardTitleComponent,
 } from "../card";
 import { Button } from "../button";
+import { useTranslations } from "next-intl";
 
 interface PostCardProps {
   post: Post;
@@ -18,6 +18,8 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post, showButton = true }: PostCardProps) {
+  const t = useTranslations("posts"); // client-side hook
+
   return (
     <Card className="flex flex-col items-center gap-4 rounded-lg border border-gray-200 p-6 shadow-sm">
       <CardHeaderComponent className="text-center w-full">
@@ -32,7 +34,7 @@ export default function PostCard({ post, showButton = true }: PostCardProps) {
         <CardFooterComponent>
           <Link href={`/${post.id}`}>
             <Button className="cursor-pointer" variant="default">
-              View Post
+              {t("viewPost")} {/* key from your translation JSON */}
             </Button>
           </Link>
         </CardFooterComponent>

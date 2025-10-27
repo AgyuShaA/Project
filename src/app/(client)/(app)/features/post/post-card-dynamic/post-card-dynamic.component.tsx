@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-
-import { postQueryOptionsById } from "../../../entities/api/post";
 import { useQuery } from "@tanstack/react-query";
 import { Card } from "../../../shared/ui/card";
 import { Button } from "../../../shared/ui/button";
+import { useTranslations } from "next-intl";
+
+import { postQueryOptionsById } from "../../../entities/api/post";
 
 interface PostCardProps {
   id: string;
@@ -16,6 +17,7 @@ export default function PostCardDynamic({
   id,
   showButton = true,
 }: PostCardProps) {
+  const t = useTranslations("posts");
   const { data: post } = useQuery(postQueryOptionsById(id));
 
   if (!post) return null;
@@ -28,7 +30,7 @@ export default function PostCardDynamic({
 
       {showButton && (
         <Link href={`/${post.id}`}>
-          <Button variant="default">View Post</Button>
+          <Button variant="default">{t("viewPost")}</Button>
         </Link>
       )}
     </Card>

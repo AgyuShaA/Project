@@ -38,5 +38,7 @@
       "oldest": "Oldest",
       "newest": "Newest"
     }
-  }
+  },
+  "viewPost": "View Post",
+  "BacktTAll": "Back to all"
 }

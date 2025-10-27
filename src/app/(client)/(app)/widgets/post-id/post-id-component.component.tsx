@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Button } from "../../shared/ui/button";
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
 const PostCardDynamic = dynamic(
   () =>
@@ -19,6 +20,8 @@ interface PostIdComponentProps {
 }
 
 export default function PostIdComponent({ id }: PostIdComponentProps) {
+  const t = useTranslations("posts"); // client-side hook
+
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">
       <Suspense fallback={<a>loading...</a>}>
@@ -27,7 +30,8 @@ export default function PostIdComponent({ id }: PostIdComponentProps) {
         <div className="flex items-center justify-center">
           <Link href="/">
             <Button className="cursor-pointer" variant="default">
-              Back to All Posts
+              {" "}
+              {t("BacktTAll")}
             </Button>
           </Link>
         </div>
