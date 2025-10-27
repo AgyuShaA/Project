@@ -28,6 +28,7 @@ const Page: FC<Readonly<IProps>> = async (props) => {
 
   const queryClient = getQueryClient();
   queryClient.prefetchQuery(postQueryOptions());
+
   const dehydratedState = dehydrate(queryClient);
 
   return (

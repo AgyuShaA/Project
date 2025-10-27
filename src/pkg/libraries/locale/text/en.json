@@ -1,1 +1,42 @@
-{}
+{
+  "login": {
+    "title": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "signInButton": "Sign In",
+    "signingIn": "Signing in…",
+    "noAccount": "Don't have an account?",
+    "register": "Register"
+  },
+  "errors": {
+    "somethingWentWrong": "Something went wrong. Please try again."
+  },
+
+  "register": {
+    "title": "Sign Up",
+    "name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "signUpButton": "Sign Up",
+    "signingUp": "Signing up…",
+    "haveAccount": "Already have an account?",
+    "login": "Sign In"
+  },
+
+  "header": {
+    "appName": "MyApp",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register"
+  },
+
+  "posts": {
+    "searchPlaceholder": "Search posts...",
+    "sort": {
+      "titleAsc": "A → Z",
+      "titleDesc": "Z → A",
+      "oldest": "Oldest",
+      "newest": "Newest"
+    }
+  }
+}

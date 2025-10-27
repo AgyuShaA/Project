@@ -5,18 +5,20 @@ import { SortOrder } from "../../../entities/models";
 import { usePostsFilterStore } from "../../../shared/store";
 import { Input } from "../../../shared/ui/input";
 import { Button } from "../../../shared/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function PostFilters() {
+  const t = useTranslations("posts"); // namespace for translations
   const { search, setSearch, sortOrder, setSortOrder } = usePostsFilterStore();
 
   const sortButtons = useMemo(
     () => [
-      { label: "A → Z", order: SortOrder.TitleAsc },
-      { label: "Z → A", order: SortOrder.TitleDesc },
-      { label: "Oldest", order: SortOrder.IdAsc },
-      { label: "Newest", order: SortOrder.IdDesc },
+      { label: t("sort.titleAsc"), order: SortOrder.TitleAsc },
+      { label: t("sort.titleDesc"), order: SortOrder.TitleDesc },
+      { label: t("sort.oldest"), order: SortOrder.IdAsc },
+      { label: t("sort.newest"), order: SortOrder.IdDesc },
     ],
-    []
+    [t]
   );
 
   const handleSort = useCallback(
@@ -46,7 +48,7 @@ export default function PostFilters() {
   return (
     <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:gap-6">
       <Input
-        placeholder="Search posts..."
+        placeholder={t("searchPlaceholder")}
         value={search}
         onChange={handleSearch}
         className="mb-3 w-full rounded-lg border border-gray-300 p-2 shadow-sm transition sm:mb-0 sm:flex-1"

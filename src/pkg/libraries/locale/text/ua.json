@@ -1,0 +1,39 @@
+{
+  "login": {
+    "title": "Увійти",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "signInButton": "Увійти",
+    "signingIn": "Вхід…",
+    "noAccount": "Ще немає акаунту?",
+    "register": "Зареєструватися"
+  },
+  "errors": {
+    "somethingWentWrong": "Щось пішло не так. Будь ласка, спробуйте ще раз."
+  },
+  "register": {
+    "title": "Реєстрація",
+    "name": "Повне ім'я",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "signUpButton": "Зареєструватися",
+    "signingUp": "Реєстрація…",
+    "haveAccount": "Вже є акаунт?",
+    "login": "Увійти"
+  },
+  "header": {
+    "appName": "МійДодаток",
+    "login": "Увійти",
+    "logout": "Вийти",
+    "register": "Зареєструватися"
+  },
+  "posts": {
+    "searchPlaceholder": "Пошук постів...",
+    "sort": {
+      "titleAsc": "А → Я",
+      "titleDesc": "Я → А",
+      "oldest": "Старіші",
+      "newest": "Новіші"
+    }
+  }
+}

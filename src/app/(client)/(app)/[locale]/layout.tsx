@@ -34,13 +34,15 @@ export const metadata: Metadata = {
 const RootLayout: FC<Readonly<IProps>> = async (props) => {
   const { children, params } = props;
 
-  setRequestLocale((await params).locale);
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale}>
           <RestApiProvider>
             <HeaderComponent />
 

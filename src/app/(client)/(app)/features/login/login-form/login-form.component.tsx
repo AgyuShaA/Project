@@ -16,8 +16,11 @@ import { ILoginForm, LoginFormSchema } from "./login-form.interface";
 import { useMutation } from "@tanstack/react-query";
 import { loginMutationOptions } from "../../../entities/api/auth/auth.mutations";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function LoginFormComponent() {
+  const t = useTranslations("login"); // translation namespace
   const { mutateAsync: login, isPending } = useMutation(loginMutationOptions());
   const router = useRouter();
 
@@ -40,20 +43,15 @@ export default function LoginFormComponent() {
       await login(data);
       router.push("/");
     } catch (error: any) {
-      if (error?.response?.data?.message) {
-        const message = error.response.data.message;
+      const message =
+        error?.response?.data?.message || t("errors.somethingWentWrong");
 
-        if (message.toLowerCase().includes("email")) {
-          setError("email", { message });
-        } else if (message.toLowerCase().includes("password")) {
-          setError("password", { message });
-        } else {
-          setError("root", { message });
-        }
+      if (message.toLowerCase().includes("email")) {
+        setError("email", { message });
+      } else if (message.toLowerCase().includes("password")) {
+        setError("password", { message });
       } else {
-        setError("root", {
-          message: "Something went wrong. Please try again.",
-        });
+        setError("root", { message });
       }
     }
   };
@@ -65,16 +63,16 @@ export default function LoginFormComponent() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex min-w-[30%] flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
         >
+          <h1 className="text-2xl font-bold mb-4">{t("title")}</h1>
+
           <FormField
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Email</FormLabel>
-
+                <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Your email" {...field} />
+                  <Input type="email" placeholder={t("email")} {...field} />
                 </FormControl>
-
                 <FormMessage className="text-sm text-red-500">
                   {errors.email?.message}
                 </FormMessage>
@@ -86,12 +84,14 @@ export default function LoginFormComponent() {
             name="password"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Password</FormLabel>
-
+                <FormLabel>{t("password")}</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder={t("password")}
+                    {...field}
+                  />
                 </FormControl>
-
                 <FormMessage className="text-sm text-red-500">
                   {errors.password?.message}
                 </FormMessage>
@@ -104,8 +104,15 @@ export default function LoginFormComponent() {
           )}
 
           <Button type="submit" disabled={isPending}>
-            {isPending ? "Signing in…" : "Sign In"}
+            {isPending ? t("signingIn") : t("signInButton")}
           </Button>
+
+          <p className="text-sm mt-2">
+            {t("noAccount")}{" "}
+            <Link href="/register" className="text-blue-600 hover:underline">
+              {t("register")}
+            </Link>
+          </p>
         </form>
       </Form>
     </div>

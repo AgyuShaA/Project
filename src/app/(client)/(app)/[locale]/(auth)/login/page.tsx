@@ -20,6 +20,7 @@ const Login: FC<Readonly<IProps>> = async (props) => {
   const { locale } = await props.params;
 
   setRequestLocale(locale);
+
   return (
     <Suspense fallback={<p>Loading form...</p>}>
       <LoginFormComponent />

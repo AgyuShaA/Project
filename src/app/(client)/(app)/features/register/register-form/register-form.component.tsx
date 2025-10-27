@@ -16,8 +16,11 @@ import { IRegisterForm, RegisterFormSchema } from "./register-form.interface";
 import { registerMutationOptions } from "../../../entities/api/auth/auth.mutations";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function RegisterFormComponent() {
+  const t = useTranslations("register");
   const { mutateAsync: register, isPending } = useMutation(
     registerMutationOptions()
   );
@@ -44,19 +47,14 @@ export default function RegisterFormComponent() {
 
       if (response.success) {
         router.push("/");
-      } else if (response?.error) {
-        if (response.error.message && response.error.message) {
-          setError(response.error.message as keyof IRegisterForm, {
-            message: response.error.message,
-          });
-        } else {
-          setError("root", { message: response.error.message });
-        }
+      } else if (response?.error?.message) {
+        setError(response.error.message as keyof IRegisterForm, {
+          message: response.error.message,
+        });
       }
     } catch (error: any) {
       const message =
-        error?.response?.data?.message ||
-        "Something went wrong. Please try again.";
+        error?.response?.data?.message || t("errors.somethingWentWrong");
 
       if (message.toLowerCase().includes("email")) {
         setError("email", { message });
@@ -75,18 +73,18 @@ export default function RegisterFormComponent() {
       <Form {...form}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex min-w-[30%] items-center justify-center flex-col max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
+          className="flex min-w-[30%] flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
         >
+          <h1 className="text-2xl font-bold mb-4">{t("title")}</h1>
+
           <FormField
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Full Name</FormLabel>
-
+                <FormLabel>{t("name")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your full name" {...field} />
+                  <Input placeholder={t("name")} {...field} />
                 </FormControl>
-
                 <FormMessage className="text-sm text-red-500">
                   {errors.name?.message}
                 </FormMessage>
@@ -98,12 +96,10 @@ export default function RegisterFormComponent() {
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Email</FormLabel>
-
+                <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Your email" {...field} />
+                  <Input type="email" placeholder={t("email")} {...field} />
                 </FormControl>
-
                 <FormMessage className="text-sm text-red-500">
                   {errors.email?.message}
                 </FormMessage>
@@ -115,14 +111,16 @@ export default function RegisterFormComponent() {
             name="password"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Password</FormLabel>
-
+                <FormLabel>{t("password")}</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder={t("password")}
+                    {...field}
+                  />
                 </FormControl>
-
                 <FormMessage className="text-sm text-red-500">
-                  {errors.password?.message}{" "}
+                  {errors.password?.message}
                 </FormMessage>
               </FormItem>
             )}
@@ -133,8 +131,15 @@ export default function RegisterFormComponent() {
           )}
 
           <Button type="submit" disabled={isPending}>
-            {isPending ? "Signing up…" : "Sign Up"}
+            {isPending ? t("signingUp") : t("signUpButton")}
           </Button>
+
+          <p className="text-sm mt-2">
+            {t("haveAccount")}{" "}
+            <Link href="/login" className="text-blue-600 hover:underline">
+              {t("login")}
+            </Link>
+          </p>
         </form>
       </Form>
     </div>
