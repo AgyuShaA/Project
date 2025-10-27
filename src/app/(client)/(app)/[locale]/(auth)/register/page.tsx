@@ -1,7 +1,7 @@
 import { FC, Suspense } from "react";
 
 import { routing } from "@/pkg/libraries/locale/routing";
-import RegisterFormComponent from "@/app/(client)/(app)/features/register-form/register-form.component";
+import RegisterFormComponent from "@/app/(client)/(app)/features/register/register-form/register-form.component";
 import { setRequestLocale } from "next-intl/server";
 
 interface IProps extends PageProps<"/[locale]/login"> {}

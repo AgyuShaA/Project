@@ -1,6 +1,6 @@
 import { FC, Suspense } from "react";
 
-import { LoginFormComponent } from "@/app/(client)/(app)/features/login-form";
+import { LoginFormComponent } from "@/app/(client)/(app)/features/login/login-form";
 import { routing } from "@/pkg/libraries/locale/routing";
 import { setRequestLocale } from "next-intl/server";
 

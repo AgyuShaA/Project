@@ -2,25 +2,18 @@
 
 import { Post } from "@/app/(client)/(app)/entities/models/post.model";
 import { PostCard } from "@/app/(client)/(app)/shared/ui/post-card";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { postQueryOptions } from "../../entities/api/post";
-import { usePostsFilterStore } from "../../shared/store";
+import { postQueryOptions } from "../../../entities/api/post";
+import { usePostsFilterStore } from "../../../shared/store";
 
 export default function PostList() {
-  const [isClient, setIsClient] = useState(false);
   const { data: postsData, isLoading, isError } = useQuery(postQueryOptions());
   const { filteredPosts, setPosts } = usePostsFilterStore();
 
   useEffect(() => {
     if (postsData) setPosts(postsData);
   }, [postsData, setPosts]);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) return null;
 
   if (isLoading) return <p>Loading posts...</p>;
   if (isError) return <p>Error loading posts</p>;

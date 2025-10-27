@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
-import { SortOrder } from "../../entities/models";
-import { usePostsFilterStore } from "../../shared/store";
-import { Input } from "../../shared/ui/input";
-import { Button } from "../../shared/ui/button";
+import { SortOrder } from "../../../entities/models";
+import { usePostsFilterStore } from "../../../shared/store";
+import { Input } from "../../../shared/ui/input";
+import { Button } from "../../../shared/ui/button";
 
 export default function PostFilters() {
   const { search, setSearch, sortOrder, setSortOrder } = usePostsFilterStore();

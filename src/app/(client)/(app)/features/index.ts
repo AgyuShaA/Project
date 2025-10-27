@@ -1,6 +1,6 @@
-export { LoginFormComponent } from "./login-form";
-export { RegisterFormComponent } from "./register-form";
+export { LoginFormComponent } from "./login/login-form";
+export { RegisterFormComponent } from "./register/register-form";
 
-export { PostCardDynamic } from "./post-card-dynamic";
-export { PostList } from "./post-list";
-export { PostListFilters } from "./post-filters";
+export { PostCardDynamic } from "./post/post-card-dynamic";
+export { PostList } from "./post/post-list";
+export { PostListFilters } from "./post/post-filters";

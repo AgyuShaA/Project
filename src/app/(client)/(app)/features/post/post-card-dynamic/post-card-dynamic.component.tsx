@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 
-import { postQueryOptionsById } from "../../entities/api/post";
+import { postQueryOptionsById } from "../../../entities/api/post";
 import { useQuery } from "@tanstack/react-query";
-import { Card } from "../../shared/ui/card";
-import { Button } from "../../shared/ui/button";
+import { Card } from "../../../shared/ui/card";
+import { Button } from "../../../shared/ui/button";
 
 interface PostCardProps {
   id: string;

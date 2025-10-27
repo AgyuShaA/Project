@@ -8,13 +8,13 @@ import {
   FormControl,
   FormMessage,
 } from "@/app/(client)/(app)/shared/ui/form";
-import { Input } from "../../shared/ui/input";
-import { Button } from "../../shared/ui/button";
+import { Input } from "../../../shared/ui/input";
+import { Button } from "../../../shared/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ILoginForm, LoginFormSchema } from "./login-form.interface";
 import { useMutation } from "@tanstack/react-query";
-import { loginMutationOptions } from "../../entities/api/auth/auth.mutations";
+import { loginMutationOptions } from "../../../entities/api/auth/auth.mutations";
 import { useRouter } from "next/navigation";
 
 export default function LoginFormComponent() {

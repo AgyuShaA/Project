@@ -8,7 +8,9 @@ import { Suspense } from "react";
 
 const PostCardDynamic = dynamic(
   () =>
-    import("@/app/(client)/(app)/features/post").then((m) => m.PostCardDynamic),
+    import("@/app/(client)/(app)/features/post/post-card-dynamic").then(
+      (m) => m.PostCardDynamic
+    ),
   { ssr: false }
 );
 
