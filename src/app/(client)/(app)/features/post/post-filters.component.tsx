@@ -35,7 +35,7 @@ export default function PostFilters() {
 
   const buttonClass = useCallback(
     (order: SortOrder) =>
-      `rounded-md px-4 py-1 transition ${
+      `rounded-md px-4 py-1 transition cursor-pointer ${
         sortOrder === order
           ? "bg-blue-600 text-white"
           : "bg-gray-100 text-gray-700 hover:bg-blue-200"

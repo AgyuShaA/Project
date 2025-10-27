@@ -1,11 +1,15 @@
+"use client";
+
 import dynamic from "next/dynamic";
 
 import Link from "next/link";
 import { Button } from "../../shared/ui/button";
 import { Suspense } from "react";
 
-const PostCardDynamic = dynamic(() =>
-  import("@/app/(client)/(app)/features/post").then((m) => m.PostCardDynamic)
+const PostCardDynamic = dynamic(
+  () =>
+    import("@/app/(client)/(app)/features/post").then((m) => m.PostCardDynamic),
+  { ssr: false }
 );
 
 interface PostIdComponentProps {
@@ -14,16 +18,18 @@ interface PostIdComponentProps {
 
 export default function PostIdComponent({ id }: PostIdComponentProps) {
   return (
-    <Suspense fallback={<a>loading...</a>}>
-      <div className="mx-auto max-w-3xl space-y-4 p-4">
+    <div className="mx-auto max-w-3xl space-y-4 p-4">
+      <Suspense fallback={<a>loading...</a>}>
         <PostCardDynamic id={id} showButton={false} />
 
         <div className="flex items-center justify-center">
           <Link href="/">
-            <Button variant="default">Back to All Posts</Button>
+            <Button className="cursor-pointer" variant="default">
+              Back to All Posts
+            </Button>
           </Link>
         </div>
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 }

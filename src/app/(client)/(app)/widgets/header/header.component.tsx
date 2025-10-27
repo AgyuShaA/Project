@@ -60,18 +60,24 @@ export default function Header() {
 
               <span>{user.name}</span>
 
-              <Button variant="outline" onClick={handleLogout}>
+              <Button
+                variant="outline"
+                className="cursor-pointer"
+                onClick={handleLogout}
+              >
                 Logout
               </Button>
             </>
           ) : (
             <>
               <Link href="/register">
-                <Button>Register</Button>
+                <Button className="cursor-pointer">Register</Button>
               </Link>
 
               <Link href="/login">
-                <Button variant="outline">Login</Button>
+                <Button variant="outline" className="cursor-pointer">
+                  Login
+                </Button>
               </Link>
             </>
           )}
