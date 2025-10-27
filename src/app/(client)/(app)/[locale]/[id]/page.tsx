@@ -6,6 +6,8 @@ import { getQueryClient } from "@/pkg/libraries/rest-api/service";
 import { routing } from "@/pkg/libraries/locale/routing";
 import { postQueryOptionsById } from "../../entities/api/post";
 import { PostIdModule } from "../../modules/post";
+import { Locale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   const locales = routing.locales;
@@ -24,14 +26,17 @@ export function generateStaticParams() {
 }
 
 interface PostPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: Locale }>;
 }
 
 export default async function PostPage({ params }: PostPageProps) {
   "use cache";
   cacheLife("default");
 
-  const { id } = await params;
+  const { id, locale } = await params;
+
+  setRequestLocale(locale);
+
   const queryClient = getQueryClient();
 
   queryClient.prefetchQuery(postQueryOptionsById(id));

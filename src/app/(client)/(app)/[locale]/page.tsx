@@ -1,5 +1,5 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { Suspense } from "react";
+import { FC, Suspense } from "react";
 import { cacheLife } from "next/cache";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
@@ -7,14 +7,24 @@ import { getQueryClient } from "@/pkg/libraries/rest-api/service";
 import { routing } from "@/pkg/libraries/locale/routing";
 import { HomeModule } from "../modules/home";
 import { postQueryOptions } from "../entities/api/post";
+import { Locale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function Home() {
+interface IProps {
+  params: Promise<{ locale: Locale }>;
+}
+
+const Page: FC<Readonly<IProps>> = async (props) => {
   "use cache";
   cacheLife("default");
+
+  const { locale } = await props.params;
+
+  setRequestLocale(locale);
 
   const queryClient = getQueryClient();
   queryClient.prefetchQuery(postQueryOptions());
@@ -27,4 +37,6 @@ export default async function Home() {
       </Suspense>
     </HydrationBoundary>
   );
-}
+};
+
+export default Page;
