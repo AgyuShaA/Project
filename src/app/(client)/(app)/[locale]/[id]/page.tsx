@@ -2,8 +2,8 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { cacheLife } from "next/cache";
 
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
-import { PostIdModule } from "@/app/(client)/(app)/modules/post";
-import { postQueryOptionsById } from "@/app/(client)/(app)/entities/api/post";
+import { PostIdModule } from "@/app/(client)/modules/post";
+import { postQueryOptionsById } from "@/app/(client)/entities/api/post";
 import { routing } from "@/pkg/libraries/locale/routing";
 
 export function generateStaticParams() {

@@ -1,5 +1,4 @@
 import { create } from "zustand";
-
 import { Post, SortOrder } from "../../entities/models";
 
 interface PostsFilterState {
