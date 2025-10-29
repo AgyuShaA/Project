@@ -8,7 +8,7 @@ const postQueryApi = async ({ queryKey }: QueryFunctionContext) => {
   const [, id] = queryKey as [string, string | undefined];
 
   const url = id ? `${apiEndpoint}/${id}` : apiEndpoint;
-
+  console.log("Request sent" + queryKey);
   try {
     const res = await restApiFetcher
       .get(url, {

@@ -8,7 +8,7 @@ const authRoutes = ["/login", "/register"];
 
 export async function proxy(req: NextRequest) {
   const i18nRes = createMiddleware(routing)(req);
-  const DEFAULT_LOCALE = "en"; // or your main locale
+  const DEFAULT_LOCALE = "en";
 
   const segments = req.nextUrl.pathname.split("/").filter(Boolean);
   const predefinedLocale = segments[0] || DEFAULT_LOCALE;
