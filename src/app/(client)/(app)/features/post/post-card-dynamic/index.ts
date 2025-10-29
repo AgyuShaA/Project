@@ -1,1 +1,1 @@
-export { default as PostCardDynamic } from "./post-card-dynamic.component";
+export { default as PostCardDetails } from "./post-card-details.component";

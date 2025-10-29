@@ -9,7 +9,7 @@ interface PostCardProps {
   showButton?: boolean;
 }
 
-export default function PostCardDynamic({ id }: PostCardProps) {
+export default function PostCardDetails({ id }: PostCardProps) {
   const { data: post } = useQuery(postQueryOptionsById(id));
 
   if (!post) return null;
