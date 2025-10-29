@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Button } from "@/app/(client)/(app)/shared/ui/button";
 import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
 import {
@@ -9,7 +8,6 @@ import {
   usePathname,
   useRouter,
 } from "@/pkg/libraries/locale/navigation";
-import { User } from "../../entities/models/user.model";
 
 import { useTranslations, useLocale } from "next-intl";
 
@@ -19,26 +17,10 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      setLoading(true);
-      const { data } = await authClient.getSession();
-      setUser(
-        data?.user
-          ? { ...data.user, image: data.user.image ?? undefined }
-          : null
-      );
-      setLoading(false);
-    };
-    fetchUser();
-  }, []);
+  const { data } = authClient.useSession();
 
   const handleLogout = async () => {
     await authClient.signOut();
-    setUser(null);
     redirect({ href: "/", locale }); // keep current locale
   };
 
@@ -52,41 +34,36 @@ export default function Header() {
         <h1 className="text-xl font-bold">{t("appName")}</h1>
       </Link>
 
-      {!loading && (
+      {data?.user ? (
         <>
-          {user ? (
-            <>
-              <div className="gap-10 flex items-center">
-                <span>{user.name}</span>
+          <div className="gap-10 flex items-center">
+            <span>{data.user.name}</span>
 
-                <Button
-                  variant="outline"
-                  className="cursor-pointer"
-                  onClick={handleLogout}
-                >
-                  {t("logout")}
-                </Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="gap-10 flex">
-                <Link href="/register">
-                  <Button className="cursor-pointer">{t("register")}</Button>
-                </Link>
+            <Button
+              variant="outline"
+              className="cursor-pointer"
+              onClick={handleLogout}
+            >
+              {t("logout")}
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="gap-10 flex">
+            <Link href="/register">
+              <Button className="cursor-pointer">{t("register")}</Button>
+            </Link>
 
-                <Link href="/login">
-                  <Button variant="outline" className="cursor-pointer">
-                    {t("login")}
-                  </Button>
-                </Link>
-              </div>
-            </>
-          )}
+            <Link href="/login">
+              <Button variant="outline" className="cursor-pointer">
+                {t("login")}
+              </Button>
+            </Link>
+          </div>
         </>
       )}
 
-      {/* Locale selector */}
       <select
         value={locale}
         onChange={(e) => changeLocale(e.target.value)}

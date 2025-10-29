@@ -43,7 +43,6 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      {" "}
       <div className="mx-auto max-w-2xl space-y-4 p-4">
         <PostIdModule id={id} />
       </div>

@@ -18,6 +18,7 @@ import { loginMutationOptions } from "../../../entities/api/auth/auth.mutations"
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { ApiError } from "../../../entities/models";
 
 export default function LoginFormComponent() {
   const t = useTranslations("login"); // translation namespace
@@ -45,9 +46,12 @@ export default function LoginFormComponent() {
       if (res.success) {
         router.push("/");
       } else if (res?.error?.message) {
-        setError(res.error.message as keyof ILoginForm, {
-          message: res.error.message,
-        });
+        if (res?.error?.message) {
+          setError("root", { message: res.error.message });
+          console.log(errors);
+        }
+
+        console.log(errors);
       }
 
       router.push("/");
@@ -61,7 +65,7 @@ export default function LoginFormComponent() {
       <Form {...form}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex min-w-[30%] flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
+          className="flex min-w-[60%] md:min-w-[35%] flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
         >
           <h1 className="text-2xl font-bold mb-4">{t("title")}</h1>
 
@@ -70,9 +74,11 @@ export default function LoginFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("email")}</FormLabel>
+
                 <FormControl>
                   <Input type="email" placeholder={t("email")} {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.email?.message}
                 </FormMessage>
@@ -85,6 +91,7 @@ export default function LoginFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("password")}</FormLabel>
+
                 <FormControl>
                   <Input
                     type="password"
@@ -92,6 +99,7 @@ export default function LoginFormComponent() {
                     {...field}
                   />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.password?.message}
                 </FormMessage>

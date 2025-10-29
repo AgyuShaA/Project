@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 const PostCardDynamic = dynamic(
   () =>
     import("@/app/(client)/(app)/features/post/post-card-dynamic").then(
-      (m) => m.PostCardDynamic
+      (m) => m.PostCardDetails
     ),
   { ssr: false }
 );
@@ -20,7 +20,7 @@ interface PostIdComponentProps {
 }
 
 export default function PostIdComponent({ id }: PostIdComponentProps) {
-  const t = useTranslations("posts"); // client-side hook
+  const t = useTranslations("posts");
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">
@@ -31,7 +31,7 @@ export default function PostIdComponent({ id }: PostIdComponentProps) {
           <Link href="/">
             <Button className="cursor-pointer" variant="default">
               {" "}
-              {t("BacktTAll")}
+              {t("backToAll")}
             </Button>
           </Link>
         </div>
