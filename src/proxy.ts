@@ -8,46 +8,39 @@ const authRoutes = ["/login", "/register"];
 
 export async function proxy(req: NextRequest) {
   const i18nRes = createMiddleware(routing)(req);
+  const DEFAULT_LOCALE = "en"; // or your main locale
 
-  const headerLocale = i18nRes.headers.get(
-    "x-middleware-request-x-next-intl-locale"
-  );
-
-  const [_, predefinedLocale, ...segments] = req.nextUrl.pathname.split("/");
-  console.log(_);
-  const pathWithoutLocale = "/" + segments.join("/");
-
-  const isLocaleProvided = headerLocale == predefinedLocale;
+  const segments = req.nextUrl.pathname.split("/").filter(Boolean);
+  const predefinedLocale = segments[0] || DEFAULT_LOCALE;
+  const pathWithoutLocale =
+    segments.length > 1
+      ? "/" + segments.slice(1).join("/")
+      : "/" + segments[0] || "/";
 
   const session = getSessionCookie(req);
+  const isAuthRoute = authRoutes.includes(pathWithoutLocale);
 
-  const isAuthRoute = authRoutes.includes(
-    isLocaleProvided ? pathWithoutLocale : req.nextUrl.pathname
-  );
+  console.log({
+    segments,
+    predefinedLocale,
+    pathWithoutLocale,
+    isAuthRoute,
+    session,
+  });
 
   if (!session) {
-    if (isAuthRoute) {
-      return i18nRes;
-    }
+    if (isAuthRoute) return i18nRes;
 
     return NextResponse.redirect(
-      new URL(
-        isLocaleProvided ? `/${predefinedLocale}/login` : "/login",
-        req.url
-      ),
-      {
-        headers: i18nRes.headers,
-      }
+      new URL(`/${predefinedLocale}/login`, req.url),
+      { headers: i18nRes.headers }
     );
   }
 
   if (isAuthRoute) {
-    return NextResponse.redirect(
-      new URL(isLocaleProvided ? `/${predefinedLocale}/` : "/", req.url),
-      {
-        headers: i18nRes.headers,
-      }
-    );
+    return NextResponse.redirect(new URL(`/${predefinedLocale}/`, req.url), {
+      headers: i18nRes.headers,
+    });
   }
 
   return i18nRes;
