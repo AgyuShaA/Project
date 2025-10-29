@@ -19,7 +19,8 @@
     "signUpButton": "Зареєструватися",
     "signingUp": "Реєстрація…",
     "haveAccount": "Вже є акаунт?",
-    "login": "Увійти"
+    "login": "Увійти",
+    "confirm_password": "Підтвердьте пароль"
   },
   "header": {
     "appName": "МійДодаток",
@@ -36,6 +37,6 @@
       "newest": "Новіші"
     },
     "viewPost": "Переглянути пост",
-    "BacktTAll": "Повернутися до всіх"
+    "backToAll": "Повернутися до всіх"
   }
 }

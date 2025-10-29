@@ -20,7 +20,8 @@
     "signUpButton": "Sign Up",
     "signingUp": "Signing up…",
     "haveAccount": "Already have an account?",
-    "login": "Sign In"
+    "login": "Sign In",
+    "confirm_password": "Confirm password"
   },
 
   "header": {
@@ -37,8 +38,10 @@
       "titleDesc": "Z → A",
       "oldest": "Oldest",
       "newest": "Newest"
-    }
+    },
+    "viewPost": "View Post",
+    "backToAll": "Back to all"
   },
   "viewPost": "View Post",
-  "BacktTAll": "Back to all"
+  "backToAll": "Back to all"
 }

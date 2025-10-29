@@ -27,11 +27,14 @@ export default function RegisterFormComponent() {
   );
   const router = useRouter();
 
+  console.log(isPending);
+
   const form = useForm<IRegisterForm>({
     defaultValues: {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
     resolver: zodResolver(RegisterFormSchema),
   });
@@ -41,11 +44,15 @@ export default function RegisterFormComponent() {
     setError,
     formState: { errors },
   } = form;
+  console.log(form.getValues());
+  console.log(errors);
 
   const onSubmit = async (data: IRegisterForm) => {
     try {
-      const response = await register(data);
+      console.log("123");
 
+      const response = await register(data);
+      console.log(response);
       if (response.success) {
         router.push("/");
       } else if (response?.error?.message) {
@@ -76,12 +83,13 @@ export default function RegisterFormComponent() {
       <Form {...form}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex min-w-[30%] flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
+          className="flex min-w-[60%] md:min-w-[40%]  flex-col items-center justify-center max-w-md mx-auto p-6 border rounded-lg shadow-sm space-y-4 bg-white"
         >
           <h1 className="text-2xl font-bold mb-4">{t("title")}</h1>
 
           <FormField
             name="name"
+            control={form.control}
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("name")}</FormLabel>
@@ -97,6 +105,7 @@ export default function RegisterFormComponent() {
 
           <FormField
             name="email"
+            control={form.control}
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("email")}</FormLabel>
@@ -111,6 +120,7 @@ export default function RegisterFormComponent() {
           />
 
           <FormField
+            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem className="w-full">
@@ -129,11 +139,31 @@ export default function RegisterFormComponent() {
             )}
           />
 
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>{t("password")}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder={t("confirm_password")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-sm text-red-500">
+                  {errors.password?.message}
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+
           {errors.root && (
             <p className="text-red-500 text-sm">{errors.root.message}</p>
           )}
 
-          <Button type="submit" disabled={isPending}>
+          <Button type="submit">
             {isPending ? t("signingUp") : t("signUpButton")}
           </Button>
 
