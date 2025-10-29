@@ -46,12 +46,7 @@ export default function LoginFormComponent() {
       if (res.success) {
         router.push("/");
       } else if (res?.error?.message) {
-        if (res?.error?.message) {
-          setError("root", { message: res.error.message });
-          console.log(errors);
-        }
-
-        console.log(errors);
+        setError("root", { message: res.error.message });
       }
 
       router.push("/");

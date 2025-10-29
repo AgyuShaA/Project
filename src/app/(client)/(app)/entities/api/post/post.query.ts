@@ -17,7 +17,7 @@ export const postQueryOptions = () => {
 };
 
 export const postQueryOptionsById = (id: string) => {
-  return queryOptions({
+  return queryOptions<Post, Error>({
     queryKey: ["post", id],
     queryFn: (params) => {
       console.log("Fetching posts with params", id);

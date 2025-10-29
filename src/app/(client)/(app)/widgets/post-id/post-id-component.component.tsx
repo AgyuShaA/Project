@@ -26,16 +26,16 @@ export default function PostIdComponent({ id }: PostIdComponentProps) {
     <div className="mx-auto max-w-3xl space-y-4 p-4">
       <Suspense fallback={<a>loading...</a>}>
         <PostCardDynamic id={id} showButton={false} />
-
-        <div className="flex items-center justify-center">
-          <Link href="/">
-            <Button className="cursor-pointer" variant="default">
-              {" "}
-              {t("backToAll")}
-            </Button>
-          </Link>
-        </div>
       </Suspense>
+
+      <div className="flex items-center justify-center">
+        <Link href="/">
+          <Button className="cursor-pointer" variant="default">
+            {" "}
+            {t("backToAll")}
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

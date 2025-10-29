@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card } from "../../../shared/ui/card";
 import { postQueryOptionsById } from "../../../entities/api/post";
+import { Post } from "../../../entities/models";
 
 interface PostCardProps {
   id: string;
@@ -10,9 +11,7 @@ interface PostCardProps {
 }
 
 export default function PostCardDetails({ id }: PostCardProps) {
-  const { data: post } = useQuery(postQueryOptionsById(id));
-
-  if (!post) return null;
+  const { data: post } = useQuery<Post>(postQueryOptionsById(id));
 
   return (
     <Card className="flex flex-col items-center gap-4 rounded-lg border border-gray-200 p-6 shadow-sm">

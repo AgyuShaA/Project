@@ -1,14 +1,14 @@
+"use cache";
+
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
-
 import { routing } from "@/pkg/libraries/locale/routing";
 import { postQueryOptionsById } from "../../entities/api/post";
 import { PostIdModule } from "../../modules/post";
 import { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const locales = routing.locales;
 
   const ids = Array.from({ length: 100 }, (_, i) => (i + 1).toString());
@@ -29,8 +29,6 @@ interface PostPageProps {
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  "use cache";
-
   const { id, locale } = await params;
 
   setRequestLocale(locale);
