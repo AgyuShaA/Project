@@ -17,7 +17,7 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { data } = authClient.useSession();
+  const { data, isPending } = authClient.useSession();
 
   const handleLogout = async () => {
     await authClient.signOut();
@@ -48,6 +48,8 @@ export default function Header() {
             </Button>
           </div>
         </>
+      ) : isPending ? (
+        <p>Loading..</p>
       ) : (
         <>
           <div className="gap-10 flex">

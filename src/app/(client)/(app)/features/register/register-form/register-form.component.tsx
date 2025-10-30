@@ -51,7 +51,7 @@ export default function RegisterFormComponent() {
       if (response.success) {
         router.push("/");
       } else if (response?.error?.message) {
-        setError(response.error.message as keyof IRegisterForm, {
+        setError("root", {
           message: response.error.message,
         });
       }

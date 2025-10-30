@@ -42,11 +42,13 @@ export default function LoginFormComponent() {
   const onSubmit = async (data: ILoginForm) => {
     try {
       const res = await login(data);
+      console.log(res);
+      console.log(errors);
 
       if (res.success) {
         router.push("/");
       } else if (res?.error?.message) {
-        setError(res.error.message as keyof ILoginForm, {
+        setError("root", {
           message: res.error.message,
         });
       }
