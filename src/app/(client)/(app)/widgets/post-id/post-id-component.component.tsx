@@ -1,37 +1,29 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
 import Link from "next/link";
 import { Button } from "../../shared/ui/button";
-import { Suspense } from "react";
 import { useTranslations } from "next-intl";
-
-const PostCardDetails = dynamic(
-  () =>
-    import("@/app/(client)/(app)/features/post/post-card-details").then(
-      (m) => m.PostCardDetails
-    ),
-  { ssr: false }
-);
+import { useQuery } from "@tanstack/react-query";
+import { Post } from "../../entities/models";
+import { postQueryOptionsById } from "../../entities/api/post";
+import { PostCard } from "../../shared/ui/post-card";
 
 interface PostIdComponentProps {
   id: string;
 }
 
 export default function PostIdComponent({ id }: PostIdComponentProps) {
+  const { data: post } = useQuery<Post>(postQueryOptionsById(id));
   const t = useTranslations("posts");
 
+  if (!post) return null;
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">
-      <Suspense fallback={<a>loading...</a>}>
-        <PostCardDetails id={id} showButton={false} />
-      </Suspense>
+      <PostCard post={post} showButton={false} />
 
       <div className="flex items-center justify-center">
         <Link href="/">
           <Button className="cursor-pointer" variant="default">
-            {" "}
             {t("backToAll")}
           </Button>
         </Link>

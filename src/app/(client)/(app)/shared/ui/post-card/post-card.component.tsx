@@ -14,9 +14,10 @@ import { useTranslations } from "next-intl";
 
 interface PostCardProps {
   post: Post;
+  showButton?: Boolean;
 }
 
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post, showButton = true }: PostCardProps) {
   const t = useTranslations("posts");
 
   return (
@@ -29,13 +30,15 @@ export default function PostCard({ post }: PostCardProps) {
         <p className="text-center text-gray-700">{post.body}</p>
       </CardContentComponent>
 
-      <CardFooterComponent>
-        <Link href={`/${post.id}`}>
-          <Button className="cursor-pointer" variant="default">
-            {t("viewPost")}
-          </Button>
-        </Link>
-      </CardFooterComponent>
+      {showButton && (
+        <CardFooterComponent>
+          <Link href={`/${post.id}`}>
+            <Button className="cursor-pointer" variant="default">
+              {t("viewPost")}
+            </Button>
+          </Link>
+        </CardFooterComponent>
+      )}
     </Card>
   );
 }
