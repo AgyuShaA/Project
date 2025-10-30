@@ -18,7 +18,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { ApiError } from "../../../entities/models";
+
+import { toast } from "react-toastify";
 
 export default function RegisterFormComponent() {
   const t = useTranslations("register");
@@ -26,8 +27,6 @@ export default function RegisterFormComponent() {
     registerMutationOptions()
   );
   const router = useRouter();
-
-  console.log(isPending);
 
   const form = useForm<IRegisterForm>({
     defaultValues: {
@@ -44,15 +43,11 @@ export default function RegisterFormComponent() {
     setError,
     formState: { errors },
   } = form;
-  console.log(form.getValues());
-  console.log(errors);
 
   const onSubmit = async (data: IRegisterForm) => {
     try {
-      console.log("123");
-
       const response = await register(data);
-      console.log(response);
+
       if (response.success) {
         router.push("/");
       } else if (response?.error?.message) {
@@ -61,20 +56,7 @@ export default function RegisterFormComponent() {
         });
       }
     } catch (error: unknown) {
-      const err = error as ApiError;
-
-      const message =
-        err?.response?.data?.message || t("errors.somethingWentWrong");
-
-      if (message.toLowerCase().includes("email")) {
-        setError("email", { message });
-      } else if (message.toLowerCase().includes("password")) {
-        setError("password", { message });
-      } else if (message.toLowerCase().includes("name")) {
-        setError("name", { message });
-      } else {
-        setError("root", { message });
-      }
+      toast.error(error as string);
     }
   };
 
@@ -93,9 +75,11 @@ export default function RegisterFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("name")}</FormLabel>
+
                 <FormControl>
                   <Input placeholder={t("name")} {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.name?.message}
                 </FormMessage>
@@ -109,9 +93,11 @@ export default function RegisterFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("email")}</FormLabel>
+
                 <FormControl>
                   <Input type="email" placeholder={t("email")} {...field} />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.email?.message}
                 </FormMessage>
@@ -125,6 +111,7 @@ export default function RegisterFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("password")}</FormLabel>
+
                 <FormControl>
                   <Input
                     type="password"
@@ -132,6 +119,7 @@ export default function RegisterFormComponent() {
                     {...field}
                   />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.password?.message}
                 </FormMessage>
@@ -145,6 +133,7 @@ export default function RegisterFormComponent() {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormLabel>{t("password")}</FormLabel>
+
                 <FormControl>
                   <Input
                     type="password"
@@ -152,6 +141,7 @@ export default function RegisterFormComponent() {
                     {...field}
                   />
                 </FormControl>
+
                 <FormMessage className="text-sm text-red-500">
                   {errors.password?.message}
                 </FormMessage>
@@ -168,7 +158,8 @@ export default function RegisterFormComponent() {
           </Button>
 
           <p className="text-sm mt-2">
-            {t("haveAccount")}{" "}
+            {t("haveAccount")}
+
             <Link href="/login" className="text-blue-600 hover:underline">
               {t("login")}
             </Link>

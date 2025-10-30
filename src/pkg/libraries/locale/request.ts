@@ -1,6 +1,7 @@
 import { getRequestConfig } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "./routing";
+import { loggerUtil } from "@/pkg/utils/logger";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
@@ -14,11 +15,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
     return { locale, messages };
   } catch (err) {
-    console.error(
-      "[next-intl] failed to load messages for locale",
-      locale,
-      err
-    );
+    loggerUtil({
+      text: "[next-intl] failed to load messages for locale",
+      value: err,
+    });
     throw err;
   }
 });

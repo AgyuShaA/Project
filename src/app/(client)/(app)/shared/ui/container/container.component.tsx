@@ -1,4 +1,4 @@
-import { cn } from "@/pkg/libraries/utils/utils";
+import { cn } from "@/pkg/utils/cn/cn";
 import { FC, ReactNode } from "react";
 
 interface IProps {

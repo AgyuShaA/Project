@@ -1,7 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import { SortOrder } from "../../entities/models";
 
 const PostListFilters = dynamic(() =>
   import("@/app/(client)/(app)/features/post/post-filters").then(
@@ -14,12 +15,20 @@ const PostList = dynamic(() =>
 );
 
 export default function PostComponent() {
+  const [search, setSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.IdDesc);
+
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">
-      <PostListFilters />
+      <PostListFilters
+        search={search}
+        sortOrder={sortOrder}
+        setSearch={setSearch}
+        setSortOrder={setSortOrder}
+      />
 
       <Suspense fallback={<>loading..</>}>
-        <PostList />
+        <PostList search={search} sortOrder={sortOrder} />
       </Suspense>
     </div>
   );

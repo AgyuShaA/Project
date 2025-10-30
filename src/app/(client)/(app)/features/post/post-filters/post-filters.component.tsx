@@ -1,49 +1,46 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
 import { SortOrder } from "../../../entities/models";
-import { usePostsFilterStore } from "../../../shared/store";
 import { Input } from "../../../shared/ui/input";
 import { Button } from "../../../shared/ui/button";
 import { useTranslations } from "next-intl";
 
-export default function PostFilters() {
-  const t = useTranslations("posts"); // namespace for translations
-  const { search, setSearch, sortOrder, setSortOrder } = usePostsFilterStore();
+interface PostFiltersProps {
+  search: string;
+  sortOrder: SortOrder;
+  setSearch: (value: string) => void;
+  setSortOrder: (order: SortOrder) => void;
+}
 
-  const sortButtons = useMemo(
-    () => [
-      { label: t("sort.titleAsc"), order: SortOrder.TitleAsc },
-      { label: t("sort.titleDesc"), order: SortOrder.TitleDesc },
-      { label: t("sort.oldest"), order: SortOrder.IdAsc },
-      { label: t("sort.newest"), order: SortOrder.IdDesc },
-    ],
-    [t]
-  );
+export default function PostFilters({
+  search,
+  sortOrder,
+  setSearch,
+  setSortOrder,
+}: PostFiltersProps) {
+  const t = useTranslations("posts");
 
-  const handleSort = useCallback(
-    (order: SortOrder) => {
-      if (order !== sortOrder) setSortOrder(order);
-    },
-    [sortOrder, setSortOrder]
-  );
+  const sortButtons = [
+    { label: t("sort.titleAsc"), order: SortOrder.TitleAsc },
+    { label: t("sort.titleDesc"), order: SortOrder.TitleDesc },
+    { label: t("sort.oldest"), order: SortOrder.IdAsc },
+    { label: t("sort.newest"), order: SortOrder.IdDesc },
+  ];
 
-  const handleSearch = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearch(e.target.value);
-    },
-    [setSearch]
-  );
+  const handleSort = (order: SortOrder) => {
+    if (order !== sortOrder) setSortOrder(order);
+  };
 
-  const buttonClass = useCallback(
-    (order: SortOrder) =>
-      `rounded-md px-4 py-1 transition cursor-pointer ${
-        sortOrder === order
-          ? "bg-blue-600 text-white"
-          : "bg-gray-100 text-gray-700 hover:bg-blue-200"
-      }`,
-    [sortOrder]
-  );
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const buttonClass = (order: SortOrder) =>
+    `rounded-md px-4 py-1 transition cursor-pointer ${
+      sortOrder === order
+        ? "bg-blue-600 text-white"
+        : "bg-gray-100 text-gray-700 hover:bg-blue-200"
+    }`;
 
   return (
     <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:gap-6">

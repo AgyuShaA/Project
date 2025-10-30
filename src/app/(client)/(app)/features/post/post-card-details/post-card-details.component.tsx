@@ -15,9 +15,9 @@ export default function PostCardDetails({ id }: PostCardProps) {
 
   return (
     <Card className="flex flex-col items-center gap-4 rounded-lg border border-gray-200 p-6 shadow-sm">
-      <h2 className="text-center text-xl font-bold">{post.title}</h2>
+      <h2 className="text-center text-xl font-bold">{post?.title}</h2>
 
-      <p className="text-center text-gray-700">{post.body}</p>
+      <p className="text-center text-gray-700">{post?.body}</p>
     </Card>
   );
 }

@@ -2,13 +2,16 @@ import { mutationOptions } from "@tanstack/react-query";
 
 import { credentialsLogin, credentialsRegister } from "./auth.api";
 import { ILogin, IRegister } from "../../models";
+import { loggerUtil } from "@/pkg/utils/logger";
 
 export const loginMutationOptions = () => {
   return mutationOptions({
     mutationFn: (loginData: ILogin) => credentialsLogin(loginData),
     onError: (error) => {
-      console.error(error);
-      return error;
+      loggerUtil({
+        text: "LoginMutationOptions",
+        value: error.message,
+      });
     },
   });
 };
@@ -18,7 +21,10 @@ export const registerMutationOptions = () => {
     mutationFn: (registerData: IRegister) => credentialsRegister(registerData),
 
     onError: (error) => {
-      console.error(error);
+      loggerUtil({
+        text: "LoginMutationOptions",
+        value: error.message,
+      });
     },
   });
 };

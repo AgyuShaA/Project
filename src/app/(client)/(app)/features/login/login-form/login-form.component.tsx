@@ -18,10 +18,10 @@ import { loginMutationOptions } from "../../../entities/api/auth/auth.mutations"
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { ApiError } from "../../../entities/models";
+import { toast } from "react-toastify";
 
 export default function LoginFormComponent() {
-  const t = useTranslations("login"); // translation namespace
+  const t = useTranslations("login");
   const { mutateAsync: login, isPending } = useMutation(loginMutationOptions());
   const router = useRouter();
 
@@ -46,12 +46,12 @@ export default function LoginFormComponent() {
       if (res.success) {
         router.push("/");
       } else if (res?.error?.message) {
-        setError("root", { message: res.error.message });
+        setError(res.error.message as keyof ILoginForm, {
+          message: res.error.message,
+        });
       }
-
-      router.push("/");
     } catch (error: unknown) {
-      console.error(error);
+      toast.error(error as string);
     }
   };
 
@@ -111,7 +111,8 @@ export default function LoginFormComponent() {
           </Button>
 
           <p className="text-sm mt-2">
-            {t("noAccount")}{" "}
+            {t("noAccount")}
+
             <Link href="/register" className="text-blue-600 hover:underline">
               {t("register")}
             </Link>

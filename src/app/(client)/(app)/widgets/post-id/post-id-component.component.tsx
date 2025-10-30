@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 
 const PostCardDynamic = dynamic(
   () =>
-    import("@/app/(client)/(app)/features/post/post-card-dynamic").then(
+    import("@/app/(client)/(app)/features/post/post-card-details").then(
       (m) => m.PostCardDetails
     ),
   { ssr: false }

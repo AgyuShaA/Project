@@ -20,14 +20,6 @@ export async function proxy(req: NextRequest) {
   const session = getSessionCookie(req);
   const isAuthRoute = authRoutes.includes(pathWithoutLocale);
 
-  console.log({
-    segments,
-    predefinedLocale,
-    pathWithoutLocale,
-    isAuthRoute,
-    session,
-  });
-
   if (!session) {
     if (isAuthRoute) return i18nRes;
 
