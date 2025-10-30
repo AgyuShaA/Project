@@ -25,7 +25,7 @@ const postQueryApi = async ({ queryKey }: QueryFunctionContext) => {
     return res;
   } catch (err) {
     loggerUtil({
-      text: "LoginMutationOptions",
+      text: "restApiFetcher",
       value: err,
     });
     throw err;

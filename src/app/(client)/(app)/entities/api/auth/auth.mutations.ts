@@ -22,7 +22,7 @@ export const registerMutationOptions = () => {
 
     onError: (error) => {
       loggerUtil({
-        text: "LoginMutationOptions",
+        text: "RegisterMutationOptions",
         value: error.message,
       });
     },
