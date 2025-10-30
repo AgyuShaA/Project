@@ -13,8 +13,16 @@ const nextConfig: NextConfig = {
   output: "standalone",
 
   images: {
-    domains: ["upload.wikimedia.org"],
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
     minimumCacheTTL: 3600,
     formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 1080, 1920, 3840],
