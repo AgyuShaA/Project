@@ -1,4 +1,4 @@
-"use client";
+"client only";
 
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -20,7 +20,7 @@ export default function PostCardDetails({ id }: PostCardProps) {
 
   return (
     <Card className="flex flex-col items-center gap-4 rounded-lg border border-gray-200 p-6 shadow-sm">
-      <CardHeaderComponent className="text-center text-xl font-bold">
+      <CardHeaderComponent className="text-center text-xl w-full font-bold">
         <CardTitleComponent>{post?.title}</CardTitleComponent>
       </CardHeaderComponent>
 
