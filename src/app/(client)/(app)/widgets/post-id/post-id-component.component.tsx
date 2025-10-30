@@ -7,7 +7,7 @@ import { Button } from "../../shared/ui/button";
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
 
-const PostCardDynamic = dynamic(
+const PostCardDetails = dynamic(
   () =>
     import("@/app/(client)/(app)/features/post/post-card-details").then(
       (m) => m.PostCardDetails
@@ -25,7 +25,7 @@ export default function PostIdComponent({ id }: PostIdComponentProps) {
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">
       <Suspense fallback={<a>loading...</a>}>
-        <PostCardDynamic id={id} showButton={false} />
+        <PostCardDetails id={id} showButton={false} />
       </Suspense>
 
       <div className="flex items-center justify-center">
