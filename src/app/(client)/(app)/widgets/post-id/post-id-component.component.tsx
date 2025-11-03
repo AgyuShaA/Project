@@ -7,16 +7,25 @@ import { useQuery } from "@tanstack/react-query";
 import { Post } from "../../entities/models";
 import { postQueryOptionsById } from "../../entities/api/post";
 import { PostCard } from "../../shared/ui/post-card";
+import { Spinner } from "../../shared/ui/spinner";
 
 interface PostIdComponentProps {
   id: string;
 }
 
 export default function PostIdComponent({ id }: PostIdComponentProps) {
-  const { data: post } = useQuery<Post>(postQueryOptionsById(id));
+  const { data: post, isLoading } = useQuery<Post>(postQueryOptionsById(id));
   const t = useTranslations("posts");
 
+  if (isLoading)
+    return (
+      <>
+        <Spinner />
+      </>
+    );
+
   if (!post) return null;
+
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">
       <PostCard post={post} showButton={false} />

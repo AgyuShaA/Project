@@ -10,6 +10,7 @@ import {
 } from "@/pkg/libraries/locale/navigation";
 
 import { useTranslations, useLocale } from "next-intl";
+import { Spinner } from "../../shared/ui/spinner";
 
 export default function Header() {
   const t = useTranslations("header");
@@ -49,7 +50,7 @@ export default function Header() {
           </div>
         </>
       ) : isPending ? (
-        <p>Loading..</p>
+        <Spinner />
       ) : (
         <>
           <div className="gap-10 flex">

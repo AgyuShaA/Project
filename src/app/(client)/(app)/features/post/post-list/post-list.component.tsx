@@ -6,6 +6,7 @@ import { PostCard } from "@/app/(client)/(app)/shared/ui/post-card";
 import { useQuery } from "@tanstack/react-query";
 import { postQueryOptions } from "../../../entities/api/post";
 import { SortOrder } from "../../../entities/models";
+import { Spinner } from "../../../shared/ui/spinner";
 
 interface PostListProps {
   search: string;
@@ -13,7 +14,7 @@ interface PostListProps {
 }
 
 export default function PostList({ search, sortOrder }: PostListProps) {
-  const { data: posts = [] } = useQuery({
+  const { data: posts = [], isLoading } = useQuery({
     ...postQueryOptions(),
     select: (data) => {
       const filtered = data.filter((post) =>
@@ -39,6 +40,13 @@ export default function PostList({ search, sortOrder }: PostListProps) {
       });
     },
   });
+
+  if (isLoading)
+    return (
+      <>
+        <Spinner />
+      </>
+    );
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">

@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { routing } from "@/pkg/libraries/locale/routing";
 import RegisterFormComponent from "@/app/(client)/(app)/features/register/register-form/register-form.component";
 import { setRequestLocale } from "next-intl/server";
+import { Skeleton } from "../../../shared/ui/skeleton";
 
 export function generateStaticParams() {
   const locales = routing.locales;
@@ -20,7 +21,7 @@ async function Register(props: PageProps<"/[locale]/register">) {
   setRequestLocale(locale);
 
   return (
-    <Suspense fallback={<p>Loading form...</p>}>
+    <Suspense fallback={<Skeleton />}>
       <RegisterFormComponent />
     </Suspense>
   );

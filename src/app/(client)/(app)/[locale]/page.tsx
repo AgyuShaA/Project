@@ -31,9 +31,7 @@ const Page: FC<Readonly<IProps>> = async (props) => {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <Suspense fallback={<p>Loading posts...</p>}>
-        <HomeModule />
-      </Suspense>
+      <HomeModule />
     </HydrationBoundary>
   );
 };
