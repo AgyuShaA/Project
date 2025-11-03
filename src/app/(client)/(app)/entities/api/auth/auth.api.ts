@@ -43,6 +43,7 @@ export async function credentialsRegister(
       email: registerData.email,
       password: registerData.password,
     });
+
     return { success: true };
   } catch (error) {
     return {

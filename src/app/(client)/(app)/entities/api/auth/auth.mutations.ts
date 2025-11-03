@@ -7,6 +7,7 @@ import { loggerUtil } from "@/pkg/utils/logger";
 export const loginMutationOptions = () => {
   return mutationOptions({
     mutationFn: (loginData: ILogin) => credentialsLogin(loginData),
+
     onError: (error) => {
       loggerUtil({
         text: "LoginMutationOptions",

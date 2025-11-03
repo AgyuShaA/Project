@@ -28,6 +28,7 @@ const postQueryApi = async ({ queryKey }: QueryFunctionContext) => {
       text: "restApiFetcher",
       value: err,
     });
+
     throw err;
   }
 };
