@@ -18,7 +18,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-
 import { toast } from "react-toastify";
 
 export default function RegisterFormComponent() {

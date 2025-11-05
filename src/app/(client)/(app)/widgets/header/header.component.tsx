@@ -22,7 +22,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     await authClient.signOut();
-    redirect({ href: "/", locale }); // keep current locale
+    redirect({ href: "/login", locale }); // keep current locale
   };
 
   const changeLocale = (newLocale: string) => {
