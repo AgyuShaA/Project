@@ -5,7 +5,7 @@
     "password": "Password",
     "signInButton": "Sign In",
     "signingIn": "Signing in…",
-    "noAccount": "Don't have an account?",
+    "noAccount": "Don't have an account? ",
     "register": "Register"
   },
   "errors": {
