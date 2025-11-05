@@ -1,8 +1,6 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { FC, Suspense } from "react";
-
+import { FC } from "react";
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
-
 import { routing } from "@/pkg/libraries/locale/routing";
 import { HomeModule } from "../modules/home";
 import { postQueryOptions } from "../entities/api/post";

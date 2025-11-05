@@ -7,6 +7,7 @@ import { postQueryOptionsById } from "../../entities/api/post";
 import { PostIdModule } from "../../modules/post";
 import { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { FC } from "react";
 
 export async function generateStaticParams() {
   const locales = routing.locales;
@@ -24,11 +25,12 @@ export async function generateStaticParams() {
   return params;
 }
 
-interface PostPageProps {
-  params: Promise<{ id: string; locale: Locale }>;
+interface IProps {
+  params: Promise<{ locale: Locale, id:string  }>
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+const Page: FC<Readonly<IProps>> = async ({params}) => {
+
   const { id, locale } = await params;
 
   setRequestLocale(locale);

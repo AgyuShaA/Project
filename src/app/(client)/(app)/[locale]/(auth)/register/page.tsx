@@ -1,9 +1,10 @@
-import { Suspense } from "react";
+import { FC, Suspense } from "react";
 
 import { routing } from "@/pkg/libraries/locale/routing";
 import RegisterFormComponent from "@/app/(client)/(app)/features/register/register-form/register-form.component";
 import { setRequestLocale } from "next-intl/server";
 import { Skeleton } from "../../../shared/ui/skeleton";
+import { Locale } from "next-intl";
 
 export function generateStaticParams() {
   const locales = routing.locales;
@@ -13,7 +14,12 @@ export function generateStaticParams() {
   }));
 }
 
-async function Register(props: PageProps<"/[locale]/register">) {
+
+interface IProps {
+  params: Promise<{ locale: Locale }>;
+}
+
+const Page: FC<Readonly<IProps>> = async (props) => {
   "use cash";
 
   const { locale } = await props.params;
@@ -27,4 +33,4 @@ async function Register(props: PageProps<"/[locale]/register">) {
   );
 }
 
-export default Register;
+export default Page;

@@ -41,7 +41,7 @@ const RootLayout: FC<Readonly<IProps>> = async (props) => {
             <HeaderComponent />
 
             {children}
-
+            
             <ToastProvider />
           </RestApiProvider>
         </NextIntlClientProvider>
