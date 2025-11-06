@@ -1,9 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense, useState } from "react";
+import {  useState } from "react";
 import { SortOrder } from "../../entities/models";
-import { Skeleton } from "../../shared/ui/skeleton";
+
 
 const PostListFilters = dynamic(() =>
   import("@/app/(client)/(app)/features/post/post-filters").then(

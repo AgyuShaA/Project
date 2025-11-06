@@ -10,7 +10,15 @@ interface PostModuleProps {
 const PostIdModule: FC<PostModuleProps> = ({ id }) => {
   return (
     <ContainerComponent className="w-full space-y-12 pb-[72px]">
+      <Suspense
+        fallback={
+          <>
+            <Skeleton />
+          </>
+        }
+      >
         <PostIdComponent id={id} />
+      </Suspense>
     </ContainerComponent>
   );
 };
