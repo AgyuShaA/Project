@@ -49,3 +49,5 @@ const Page: FC<Readonly<IProps>> = async ({params}) => {
     </HydrationBoundary>
   );
 }
+
+export default Page

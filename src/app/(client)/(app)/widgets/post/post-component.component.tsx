@@ -12,7 +12,7 @@ const PostListFilters = dynamic(() =>
 );
 
 const PostList = dynamic(() =>
-  import("@/app/(client)/(app)/features/post/post-list").then((m) => m.PostList)
+  import("@/app/(client)/(app)/features/post/post-list").then((m) => m.PostList), {ssr:false}
 );
 
 export default function PostComponent() {
@@ -27,16 +27,8 @@ export default function PostComponent() {
         setSearch={setSearch}
         setSortOrder={setSortOrder}
       />
-
-      <Suspense
-        fallback={
-          <>
-            <Skeleton />
-          </>
-        }
-      >
+      
         <PostList search={search} sortOrder={sortOrder} />
-      </Suspense>
     </div>
   );
 }

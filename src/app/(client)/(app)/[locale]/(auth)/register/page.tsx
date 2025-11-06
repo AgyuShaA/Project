@@ -25,9 +25,7 @@ const Page: FC<Readonly<IProps>> = async (props) => {
   setRequestLocale(locale);
 
   return (
-    <Suspense fallback={<Skeleton />}>
       <RegisterFormComponent />
-    </Suspense>
   );
 }
 

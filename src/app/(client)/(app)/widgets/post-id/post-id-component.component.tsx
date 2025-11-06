@@ -14,17 +14,10 @@ interface PostIdComponentProps {
 }
 
 export default function PostIdComponent({ id }: PostIdComponentProps) {
-  const { data: post, isLoading } = useQuery<Post>(postQueryOptionsById(id));
+  const { data: post } = useQuery<Post>(postQueryOptionsById(id));
   const t = useTranslations("posts");
 
-  if (isLoading)
-    return (
-      <>
-        <Spinner />
-      </>
-    );
 
-  if (!post) return null;
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 p-4">

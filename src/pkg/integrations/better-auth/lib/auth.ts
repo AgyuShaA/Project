@@ -19,6 +19,7 @@ export const auth = betterAuth({
       verification: shema.verification,
     },
   }),
+  
   	secondaryStorage: {
     useFor: ["session"],
 
@@ -34,7 +35,15 @@ export const auth = betterAuth({
 			await redis.del(key);
 		}
 	},
+
   emailAndPassword: {
     enabled: true,
+  },
+
+  socialProviders: {
+  google: {
+      clientId: process.env.GCP_CLIENT_ID!,
+      clientSecret: process.env.GCP_CLIENT_SECRET!,
+    },
   },
 });
