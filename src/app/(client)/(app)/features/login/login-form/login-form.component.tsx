@@ -14,16 +14,21 @@ import { useTranslations } from 'next-intl'
 import { toast } from 'react-toastify'
 import { authClient } from '@/pkg/integrations/better-auth/lib/auth-client'
 import { FcGoogle } from 'react-icons/fc'
+import { Github } from 'lucide-react' // ✅ use this
 
 export default function LoginFormComponent() {
   const t = useTranslations('login')
   const { mutateAsync: login, isPending } = useMutation(loginMutationOptions())
   const router = useRouter()
 
-  const handleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     await authClient.signIn.social({
       provider: 'google',
     })
+  }
+
+  const handleGithubSignIn = async () => {
+    await authClient.signIn.social({ provider: 'github' })
   }
 
   const form = useForm<ILoginForm>({
@@ -108,8 +113,12 @@ export default function LoginFormComponent() {
               {t('register')}
             </Link>
           </p>
-          <Button type='button' onClick={handleSignIn}>
-            <FcGoogle /> Sign in with
+          <Button type='button' onClick={handleGoogleSignIn}>
+            <FcGoogle /> Sign in with Google
+          </Button>
+
+          <Button type='button' onClick={handleGithubSignIn}>
+            Sign in with GitHub <Github />
           </Button>
         </form>
       </Form>

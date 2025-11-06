@@ -12,6 +12,9 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { toast } from 'react-toastify'
+import { FcGoogle } from 'react-icons/fc'
+import { authClient } from '@/pkg/integrations/better-auth/lib/auth-client'
+import { Github } from 'lucide-react'
 
 export default function RegisterFormComponent() {
   const t = useTranslations('register')
@@ -50,6 +53,15 @@ export default function RegisterFormComponent() {
     }
   }
 
+  const handleGithubSignIn = async () => {
+    await authClient.signIn.social({ provider: 'github' })
+  }
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: 'google',
+    })
+  }
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-50'>
       <Form {...form}>
@@ -134,6 +146,14 @@ export default function RegisterFormComponent() {
               {t('login')}
             </Link>
           </p>
+
+          <Button type='button' onClick={handleGoogleSignIn}>
+            <FcGoogle /> Sign in with Google
+          </Button>
+
+          <Button type='button' onClick={handleGithubSignIn}>
+            Sign in with GitHub <Github />
+          </Button>
         </form>
       </Form>
     </div>
