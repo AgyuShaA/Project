@@ -9,4 +9,4 @@ export {
   FieldSetComponent,
   FieldContentComponent,
   FieldTitleComponent,
-} from "./field.component";
+} from './field.component'

@@ -6,4 +6,4 @@ export {
   CardActionComponent,
   CardDescriptionComponent,
   CardContentComponent,
-} from "./card.component";
+} from './card.component'

@@ -1,1 +1,1 @@
-export { default as PostList } from "./post-list.component";
+export { default as PostList } from './post-list.component'

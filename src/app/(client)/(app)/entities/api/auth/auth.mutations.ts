@@ -1,8 +1,8 @@
-import { mutationOptions } from "@tanstack/react-query";
+import { mutationOptions } from '@tanstack/react-query'
 
-import { credentialsLogin, credentialsRegister } from "./auth.api";
-import { ILogin, IRegister } from "../../models";
-import { loggerUtil } from "@/pkg/utils/logger";
+import { credentialsLogin, credentialsRegister } from './auth.api'
+import { ILogin, IRegister } from '../../models'
+import { loggerUtil } from '@/pkg/utils/logger'
 
 export const loginMutationOptions = () => {
   return mutationOptions({
@@ -10,12 +10,12 @@ export const loginMutationOptions = () => {
 
     onError: (error) => {
       loggerUtil({
-        text: "LoginMutationOptions",
+        text: 'LoginMutationOptions',
         value: error.message,
-      });
+      })
     },
-  });
-};
+  })
+}
 
 export const registerMutationOptions = () => {
   return mutationOptions({
@@ -23,9 +23,9 @@ export const registerMutationOptions = () => {
 
     onError: (error) => {
       loggerUtil({
-        text: "RegisterMutationOptions",
+        text: 'RegisterMutationOptions',
         value: error.message,
-      });
+      })
     },
-  });
-};
+  })
+}

@@ -1,51 +1,42 @@
-"use client";
+'use client'
 
-import { Button } from "@/app/(client)/(app)/shared/ui/button";
-import { authClient } from "@/pkg/integrations/better-auth/lib/auth-client";
-import {
-  Link,
-  redirect,
-  usePathname,
-  useRouter,
-} from "@/pkg/libraries/locale/navigation";
+import { Button } from '@/app/(client)/(app)/shared/ui/button'
+import { authClient } from '@/pkg/integrations/better-auth/lib/auth-client'
+import { Link, redirect, usePathname, useRouter } from '@/pkg/libraries/locale/navigation'
 
-import { useTranslations, useLocale } from "next-intl";
-import { Spinner } from "../../shared/ui/spinner";
+import { useTranslations, useLocale } from 'next-intl'
+import { Spinner } from '../../shared/ui/spinner'
 
 export default function Header() {
-  const t = useTranslations("header");
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
+  const t = useTranslations('header')
+  const locale = useLocale()
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const { data, isPending } = authClient.useSession();
+  const { data, isPending } = authClient.useSession()
 
   const handleLogout = async () => {
-    await authClient.signOut();
-    redirect({ href: "/login", locale }); // keep current locale
-  };
+    await authClient.signOut()
+    redirect({ href: '/login', locale }) // keep current locale
+  }
 
   const changeLocale = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
-  };
+    router.replace(pathname, { locale: newLocale })
+  }
 
   return (
-    <header className="w-full flex items-center justify-between p-4 bg-white shadow-sm">
-      <Link href="/">
-        <h1 className="text-xl font-bold">{t("appName")}</h1>
+    <header className='flex w-full items-center justify-between bg-white p-4 shadow-sm'>
+      <Link href='/'>
+        <h1 className='text-xl font-bold'>{t('appName')}</h1>
       </Link>
 
       {data?.user ? (
         <>
-          <div className="gap-10 flex items-center">
+          <div className='flex items-center gap-10'>
             <span>{data.user.name}</span>
 
-            <Button
-              variant="outline"
-              className="cursor-pointer"
-              onClick={handleLogout}
-            >
-              {t("logout")}
+            <Button variant='outline' className='cursor-pointer' onClick={handleLogout}>
+              {t('logout')}
             </Button>
           </div>
         </>
@@ -53,14 +44,14 @@ export default function Header() {
         <Spinner />
       ) : (
         <>
-          <div className="gap-10 flex">
-            <Link href="/register">
-              <Button className="cursor-pointer">{t("register")}</Button>
+          <div className='flex gap-10'>
+            <Link href='/register'>
+              <Button className='cursor-pointer'>{t('register')}</Button>
             </Link>
 
-            <Link href="/login">
-              <Button variant="outline" className="cursor-pointer">
-                {t("login")}
+            <Link href='/login'>
+              <Button variant='outline' className='cursor-pointer'>
+                {t('login')}
               </Button>
             </Link>
           </div>
@@ -70,11 +61,11 @@ export default function Header() {
       <select
         value={locale}
         onChange={(e) => changeLocale(e.target.value)}
-        className="border border-gray-300 rounded px-2 py-1"
+        className='rounded border border-gray-300 px-2 py-1'
       >
-        <option value="en">English</option>
-        <option value="ua">Українська</option>
+        <option value='en'>English</option>
+        <option value='ua'>Українська</option>
       </select>
     </header>
-  );
+  )
 }

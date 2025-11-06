@@ -1,1 +1,1 @@
-export { default as Spinner } from "./spinner.component";
+export { default as Spinner } from './spinner.component'

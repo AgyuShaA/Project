@@ -1,36 +1,36 @@
-import { notFound } from "next/navigation";
-import { QueryFunctionContext } from "@tanstack/react-query";
+import { notFound } from 'next/navigation'
+import { QueryFunctionContext } from '@tanstack/react-query'
 
-import { apiEndpoint, Post } from "../../models";
-import { restApiFetcher } from "@/pkg/libraries/rest-api/fetcher";
-import { loggerUtil } from "@/pkg/utils/logger";
+import { apiEndpoint, Post } from '../../models'
+import { restApiFetcher } from '@/pkg/libraries/rest-api/fetcher'
+import { loggerUtil } from '@/pkg/utils/logger'
 
 const postQueryApi = async ({ queryKey }: QueryFunctionContext) => {
-  const [, id] = queryKey as [string, string | undefined];
+  const [, id] = queryKey as [string, string | undefined]
 
-  const url = id ? `${apiEndpoint}/${id}` : apiEndpoint;
+  const url = id ? `${apiEndpoint}/${id}` : apiEndpoint
 
   try {
     const res = await restApiFetcher
       .get(url, {
-        cache: "force-cache",
+        cache: 'force-cache',
         next: { revalidate: 30 },
       })
-      .json<Post | Post[]>();
+      .json<Post | Post[]>()
 
     if (!res || (Array.isArray(res) && res.length === 0)) {
-      notFound();
+      notFound()
     }
 
-    return res;
+    return res
   } catch (err) {
     loggerUtil({
-      text: "restApiFetcher",
+      text: 'restApiFetcher',
       value: err,
-    });
+    })
 
-    throw err;
+    throw err
   }
-};
+}
 
-export default postQueryApi;
+export default postQueryApi

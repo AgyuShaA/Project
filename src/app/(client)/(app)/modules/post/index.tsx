@@ -1,1 +1,1 @@
-export { default as PostIdModule } from "./post.module";
+export { default as PostIdModule } from './post.module'

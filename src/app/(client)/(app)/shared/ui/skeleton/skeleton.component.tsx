@@ -1,9 +1,5 @@
-const Skeleton = ({ className = "h-6 w-full rounded-md" }) => {
-  return (
-    <div
-      className={`bg-gray-300 dark:bg-gray-700 animate-pulse ${className}`}
-    ></div>
-  );
-};
+const Skeleton = ({ className = 'h-6 w-full rounded-md' }) => {
+  return <div className={`animate-pulse bg-gray-300 dark:bg-gray-700 ${className}`}></div>
+}
 
-export default Skeleton;
+export default Skeleton

@@ -1,23 +1,23 @@
-import { type Logger, pino } from "pino";
+import { type Logger, pino } from 'pino'
 
 interface IDebugUtil {
-  text: string;
-  value: unknown;
-  isActiveOnProd?: boolean;
+  text: string
+  value: unknown
+  isActiveOnProd?: boolean
 }
 
 export const loggerUtil = (props: IDebugUtil) => {
-  const { text, value, isActiveOnProd = false } = props;
+  const { text, value, isActiveOnProd = false } = props
 
   const logger: Logger = pino({
     transport: {
-      target: "pino-pretty",
+      target: 'pino-pretty',
       options: { colorize: true },
     },
     timestamp: pino.stdTimeFunctions.epochTime,
-    enabled: process.env.NODE_ENV !== "production" || isActiveOnProd,
+    enabled: process.env.NODE_ENV !== 'production' || isActiveOnProd,
     redact: [],
-  });
+  })
 
-  logger.info(`[${text}]: ${JSON.stringify(value, null, 2)}`);
-};
+  logger.info(`[${text}]: ${JSON.stringify(value, null, 2)}`)
+}

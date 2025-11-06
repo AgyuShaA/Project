@@ -5,7 +5,7 @@
     "password": "Пароль",
     "signInButton": "Увійти",
     "signingIn": "Вхід…",
-    "noAccount": "Ще немає акаунту? ",
+    "noAccount": "Ще немає акаунту?",
     "register": "Зареєструватися"
   },
   "errors": {

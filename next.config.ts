@@ -1,5 +1,5 @@
-import { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
+import { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig: NextConfig = {
   productionBrowserSourceMaps: true,
@@ -10,30 +10,30 @@ const nextConfig: NextConfig = {
 
   cacheMaxMemorySize: 100 * 1024 * 1024,
 
-  output: "standalone",
+  output: 'standalone',
 
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
       },
       {
-        protocol: "https",
-        hostname: "**",
+        protocol: 'https',
+        hostname: '**',
       },
     ],
     minimumCacheTTL: 3600,
-    formats: ["image/webp", "image/avif"],
+    formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 1080, 1920, 3840],
     imageSizes: [16, 64, 128, 384],
   },
 
-  serverExternalPackages: ["pino", "pino-pretty"],
-};
+  serverExternalPackages: ['pino', 'pino-pretty'],
+}
 
 const nextConfigWithIntl = createNextIntlPlugin({
-  requestConfig: "./src/pkg/libraries/locale/request.ts",
-});
+  requestConfig: './src/pkg/libraries/locale/request.ts',
+})
 
-export default nextConfigWithIntl(nextConfig);
+export default nextConfigWithIntl(nextConfig)

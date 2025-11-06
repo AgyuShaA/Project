@@ -1,1 +1,1 @@
-export { default as Skeleton } from "./skeleton.component";
+export { default as Skeleton } from './skeleton.component'

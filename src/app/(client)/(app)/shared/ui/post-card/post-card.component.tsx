@@ -1,44 +1,38 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { Post } from "@/app/(client)/(app)/entities/models";
-import {
-  Card,
-  CardContentComponent,
-  CardFooterComponent,
-  CardHeaderComponent,
-  CardTitleComponent,
-} from "../card";
-import { Button } from "../button";
-import { useTranslations } from "next-intl";
+import Link from 'next/link'
+import { Post } from '@/app/(client)/(app)/entities/models'
+import { Card, CardContentComponent, CardFooterComponent, CardHeaderComponent, CardTitleComponent } from '../card'
+import { Button } from '../button'
+import { useTranslations } from 'next-intl'
 
 interface PostCardProps {
-  post?: Post;
-  showButton?: Boolean;
+  post?: Post
+  showButton?: Boolean
 }
 
 export default function PostCard({ post, showButton = true }: PostCardProps) {
-  const t = useTranslations("posts");
+  const t = useTranslations('posts')
 
   return (
-    <Card className="flex flex-col items-center gap-4 rounded-lg border border-gray-200 p-6 shadow-sm">
-      <CardHeaderComponent className="text-center w-full">
+    <Card className='flex flex-col items-center gap-4 rounded-lg border border-gray-200 p-6 shadow-sm'>
+      <CardHeaderComponent className='w-full text-center'>
         <CardTitleComponent>{post?.title}</CardTitleComponent>
       </CardHeaderComponent>
 
       <CardContentComponent>
-        <p className="text-center text-gray-700">{post?.body}</p>
+        <p className='text-center text-gray-700'>{post?.body}</p>
       </CardContentComponent>
 
       {showButton && (
         <CardFooterComponent>
           <Link href={`/${post?.id}`}>
-            <Button className="cursor-pointer" variant="default">
-              {t("viewPost")}
+            <Button className='cursor-pointer' variant='default'>
+              {t('viewPost')}
             </Button>
           </Link>
         </CardFooterComponent>
       )}
     </Card>
-  );
+  )
 }

@@ -1,1 +1,1 @@
-export { interFont } from "./font-inter";
+export { interFont } from './font-inter'
