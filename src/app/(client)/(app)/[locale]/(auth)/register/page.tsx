@@ -1,8 +1,7 @@
-import { FC, Suspense } from 'react'
+import { FC } from 'react'
 import { routing } from '@/pkg/libraries/locale/routing'
 import RegisterFormComponent from '@/app/(client)/(app)/features/register/register-form/register-form.component'
 import { setRequestLocale } from 'next-intl/server'
-import { Skeleton } from '../../../shared/ui/skeleton'
 import { Locale } from 'next-intl'
 
 export function generateStaticParams() {

@@ -1,11 +1,14 @@
+'use client'
 import { Suspense, type FC } from 'react'
 import { ContainerComponent } from '../../shared/ui/container'
-import { PostIdComponent } from '../../widgets/post-id'
+import dynamic from 'next/dynamic'
 import { Skeleton } from '../../shared/ui/skeleton'
 
 interface PostModuleProps {
   id: string
 }
+
+const PostIdComponent = dynamic(() => import('../../widgets/post-id').then((m) => m.PostIdComponent), { ssr: false })
 
 const PostIdModule: FC<PostModuleProps> = ({ id }) => {
   return (

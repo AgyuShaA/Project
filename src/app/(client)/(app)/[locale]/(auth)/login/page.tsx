@@ -1,8 +1,8 @@
-import { FC, Suspense } from 'react'
+import { FC } from 'react'
 import { LoginFormComponent } from '@/app/(client)/(app)/features/login/login-form'
 import { routing } from '@/pkg/libraries/locale/routing'
 import { setRequestLocale } from 'next-intl/server'
-import { Skeleton } from '../../../shared/ui/skeleton'
+
 import { Locale } from 'next-intl'
 
 export function generateStaticParams() {

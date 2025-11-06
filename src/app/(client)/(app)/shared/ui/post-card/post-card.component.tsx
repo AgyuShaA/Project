@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 
 interface PostCardProps {
   post?: Post
-  showButton?: Boolean
+  showButton?: boolean
 }
 
 export default function PostCard({ post, showButton = true }: PostCardProps) {
