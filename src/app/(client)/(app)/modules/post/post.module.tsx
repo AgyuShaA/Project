@@ -1,4 +1,5 @@
 'use client'
+
 import { Suspense, type FC } from 'react'
 import { ContainerComponent } from '../../shared/ui/container'
 import dynamic from 'next/dynamic'

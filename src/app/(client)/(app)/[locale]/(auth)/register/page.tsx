@@ -1,3 +1,5 @@
+'use cache'
+
 import { FC } from 'react'
 import { routing } from '@/pkg/libraries/locale/routing'
 import RegisterFormComponent from '@/app/(client)/(app)/features/register/register-form/register-form.component'
@@ -17,8 +19,6 @@ interface IProps {
 }
 
 const Page: FC<Readonly<IProps>> = async (props) => {
-  'use cash'
-
   const { locale } = await props.params
 
   setRequestLocale(locale)

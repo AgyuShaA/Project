@@ -1,3 +1,5 @@
+'use cache'
+
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { FC } from 'react'
 import { getQueryClient } from '@/pkg/libraries/rest-api/service'
@@ -7,7 +9,7 @@ import { postQueryOptions } from '../entities/api/post'
 import { Locale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
@@ -16,8 +18,6 @@ interface IProps {
 }
 
 const Page: FC<Readonly<IProps>> = async (props) => {
-  'use cache'
-
   const { locale } = await props.params
 
   setRequestLocale(locale)
